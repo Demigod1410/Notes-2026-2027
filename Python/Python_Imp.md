@@ -1,179 +1,315 @@
-# 1. Explain the Two Types of Python Modes in Which a Python Script Can Be Executed
+# Explain the Two Types of Python Modes Where a Python Script Can Be Executed
 
-## 1. Introduction
+## Introduction
 
-Python programs can be executed in two main modes:
+Python is a flexible programming language that allows developers to run code in more than one way. The two primary modes for executing Python code are **Script Mode** and **Interactive Mode**. Understanding the difference between these modes is fundamental because each serves a different purpose in the development workflow. Script mode is used for writing complete, reusable programs, while interactive mode is ideal for quick experimentation and learning.
 
-1. Interactive Mode
-2. Script Mode
+This distinction matters because the Python interpreter behaves differently depending on how it is invoked. The official Python documentation states that when the interpreter is called with a file name argument or with a file as standard input, it reads and executes a script from that file. When called with standard input connected to a terminal (a tty device), it reads and executes commands interactively.
 
-Both modes use the Python interpreter to execute code, but they differ in how the programmer enters, executes, and saves the code. The official Python documentation describes both ways of using the interpreter. [Source: Python Documentation](https://docs.python.org/3/tutorial/interpreter.html).
+---
 
-## 2. Interactive Mode
+## Definition
 
-### Definition
+**Script Mode** refers to writing Python code in a file with a `.py` extension and executing that entire file as a complete program using the Python interpreter. The interpreter reads the file from top to bottom and executes every statement in sequence.
 
-Interactive mode is a method of executing Python code in which the programmer enters statements directly into the Python interpreter and receives immediate results.
+**Interactive Mode** refers to starting the Python interpreter without a script file, where it presents a prompt (`>>>`) and executes one statement at a time as the user types it, displaying results immediately after each line.
 
-It is also called REPL (Read–Eval–Print Loop) because the interpreter repeatedly reads the input, evaluates it, displays the result, and waits for the next command.
+---
 
-### Diagram
+## Detailed Explanation
 
-\#chatgpt-mermaid-\_r_33a\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_33a\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_33a\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_33a\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_33a\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_33a\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_33a\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_33a\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_33a\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_33a\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33a\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33a\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_33a\_ p{margin:0;}#chatgpt-mermaid-\_r_33a\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ .cluster-label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ .cluster-label span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_33a\_ .label text,#chatgpt-mermaid-\_r_33a\_ span{fill:rgb(237, 237, 237);color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ .node rect,#chatgpt-mermaid-\_r_33a\_ .node circle,#chatgpt-mermaid-\_r_33a\_ .node ellipse,#chatgpt-mermaid-\_r_33a\_ .node polygon,#chatgpt-mermaid-\_r_33a\_ .node path{fill:rgb(17, 40, 19);stroke:rgb(58, 132, 63);stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .rough-node .label text,#chatgpt-mermaid-\_r_33a\_ .node .label text,#chatgpt-mermaid-\_r_33a\_ .image-shape .label,#chatgpt-mermaid-\_r_33a\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_33a\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .rough-node .label,#chatgpt-mermaid-\_r_33a\_ .node .label,#chatgpt-mermaid-\_r_33a\_ .image-shape .label,#chatgpt-mermaid-\_r_33a\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_33a\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_33a\_ .root .anchor path{fill:rgb(175, 175, 175)!important;stroke-width:0;stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33a\_ .arrowheadPath{fill:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33a\_ .edgePath .path{stroke:rgb(175, 175, 175);stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .flowchart-link{stroke:rgb(175, 175, 175);fill:none;}#chatgpt-mermaid-\_r_33a\_ .edgeLabel{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_33a\_ .edgeLabel p{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_33a\_ .edgeLabel rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_33a\_ .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#chatgpt-mermaid-\_r_33a\_ .cluster rect{fill:rgb(48, 48, 48);stroke:rgba(255, 255, 255, 0.15);stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .cluster text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ .cluster span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:12px;background:rgb(48, 48, 48);border:1px solid rgba(255, 255, 255, 0.15);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_33a\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33a\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_33a\_ .icon-shape,#chatgpt-mermaid-\_r_33a\_ .image-shape{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_33a\_ .icon-shape p,#chatgpt-mermaid-\_r_33a\_ .image-shape p{background-color:rgb(0, 0, 0);padding:2px;}#chatgpt-mermaid-\_r_33a\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_33a\_ .image-shape .label rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_33a\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_33a\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_33a\_ .node .neo-node{stroke:rgb(58, 132, 63);}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_33a\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_33a\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node .neo-line path{stroke:rgb(58, 132, 63);filter:none;}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_33a\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_33a\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33a\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_33a\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33a\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(140, 223, 173);}#chatgpt-mermaid-\_r_33a\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(140, 223, 173);}#chatgpt-mermaid-\_r_33a\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_33a\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_33a\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(2, 28, 12);stroke:rgb(26, 75, 45);stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .node rect,#chatgpt-mermaid-\_r_33a\_ .node circle,#chatgpt-mermaid-\_r_33a\_ .node ellipse,#chatgpt-mermaid-\_r_33a\_ .node polygon,#chatgpt-mermaid-\_r_33a\_ .node path{fill:rgb(0, 55, 22);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_33a\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_33a\_ .node.mermaid-decision .label-container{fill:rgb(2, 28, 12);stroke:rgb(26, 75, 45);stroke-dasharray:2px,2px;}#chatgpt-mermaid-\_r_33a\_ .edgePaths .flowchart-link{stroke:rgb(175, 175, 175);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_33a\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33a\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}Start Python InterpreterEnter Python StatementInterpreter Executes StatementDisplay ResultEnter Another Statement?Exit InterpreterYesNo
+### 1. Script Mode
 
-Explanation: The programmer enters a statement, Python executes it, and the result is displayed immediately. The process continues until the programmer exits the interpreter.
+Script mode is the standard way of developing Python applications. In this mode, you create a text file containing Python statements, save it with a `.py` extension, and then run it through the Python interpreter.
 
-### Example
+#### How It Works
 
-Open a terminal or command prompt and type `python` or `python3`, depending on your system.
+When you run a script, the Python interpreter processes the file as a **complete program**. According to the Python Language Reference, a complete program is executed in a minimally initialized environment where built-in and standard modules are available, and the `__main__` module provides the namespace for execution.
 
+On most systems, you execute a script by typing the following command in a terminal or command prompt:
+
+```bash
+python script_name.py
 ```
->>> 10 + 2030>>> print("Hello, Python!")Hello, Python!>>> 5 * 420
+
+On Windows, you may also use the `py` launcher:
+
+```bash
+py script_name.py
 ```
 
-Here, `>>>` represents the standard interactive prompt.
+#### Key Characteristics
 
-### Characteristics
+- **Complete program execution**: The entire file is read and executed from top to bottom.
+- **Reusability**: Scripts can be saved, shared, and rerun multiple times.
+- **Structured organization**: Code can be divided into functions, classes, and modules.
+- **No immediate feedback per line**: You see output only when the program prints something or completes execution.
+- **Error handling**: If an error occurs, the interpreter prints an error message and a stack trace, then exits with a nonzero exit status.
 
-- Executes commands as they are entered and completed.
-- Displays the result of expressions automatically.
-- Allows immediate testing of Python statements.
-- Maintains variables and other session state during the session.
-- Does not automatically save the session as a reusable `.py` program.
+### 2. Interactive Mode
 
-### Advantages
+Interactive mode, often called a **REPL** (Read-Evaluate-Print Loop), provides a dynamic environment for executing Python statements one at a time.
 
-- Easy for beginners to learn.
-- Provides immediate feedback.
-- Useful for testing calculations and expressions.
-- Helps experiment with functions, variables, and data types.
+#### How It Works
 
-### Disadvantages
+You enter interactive mode by typing `python` (or `py` on Windows) without specifying a script file. The interpreter displays a welcome message with version and copyright information, followed by the primary prompt, which is typically three greater-than signs (`>>>`):
 
-- Not convenient for large programs.
-- Code must be saved separately if it needs to be reused.
-- Managing many statements can become difficult.
+```text
+$ python3
+Python 3.13.0 (main, Oct  7 2024, 12:00:00) [GCC 13.2.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
 
-### Applications
+When you enter a multi-line construct such as an `if` statement or a loop, the interpreter uses a secondary prompt, typically three dots (`...`), to indicate that it is waiting for continuation lines:
 
-- Learning Python syntax.
+```python
+>>> the_world_is_flat = True
+>>> if the_world_is_flat:
+...     print("Be careful not to fall off!")
+...
+Be careful not to fall off!
+```
+
+#### Key Characteristics
+
+- **Line-by-line execution**: Each statement is executed immediately after you press Enter.
+- **Immediate feedback**: Results (if any) are displayed instantly.
+- **No file needed**: Ideal for quick tests and experiments.
+- **Compound statements require blank lines**: In interactive mode, a top-level compound statement must be followed by a blank line to signal the end of input.
+- **Error behavior**: When an error occurs, the interpreter prints an error message and returns to the primary prompt without exiting.
+
+#### Exiting Interactive Mode
+
+You can exit interactive mode by typing `exit()` or `quit()`, or by pressing `Ctrl-D` on Unix/Linux or `Ctrl-Z` on Windows.
+
+---
+
+## Diagram: Python Execution Modes
+
+The following diagram illustrates how the Python interpreter decides between script mode and interactive mode based on how it is invoked.
+
+```mermaid
+flowchart TD
+    A[Python Interpreter Invoked] --> B{How was it called?}
+    
+    B -->|python script.py| C[Script Mode]
+    B -->|python -c "command"| C
+    B -->|python < file.py| C
+    B -->|python -m module| C
+    B -->|python / py| D[Interactive Mode]
+    
+    C --> C1[Read entire file]
+    C1 --> C2[Compile to bytecode]
+    C2 --> C3[Execute statements top to bottom]
+    C3 --> C4[Program ends]
+    
+    D --> D1[Display >>> prompt]
+    D1 --> D2[Read one statement]
+    D2 --> D3[Execute immediately]
+    D3 --> D4[Display result]
+    D4 --> D5{More input?}
+    D5 -->|Yes| D2
+    D5 -->|No / exit| D6[Interpreter exits]
+    
+    style C fill:#e1f5fe
+    style D fill:#fff3e0
+```
+
+**Diagram explanation:** This flowchart shows the decision point when the Python interpreter starts. If a file name, `-c` command, standard input from a file, or `-m` module is provided, the interpreter enters **Script Mode** and executes the complete program. If no script is provided (just `python` or `py`), the interpreter enters **Interactive Mode**, where it repeatedly reads, evaluates, and prints results until the user exits.
+
+---
+
+## Python Syntax and Code Examples
+
+### Example 1: Script Mode
+
+Create a file named `greet_script.py`:
+
+```python
+# greet_script.py
+def greet(name):
+    """Return a greeting message."""
+    return f"Hello, {name}!"
+
+# Main program
+message = greet("Student")
+print(message)
+print("This is script mode execution.")
+```
+
+**Execution command:**
+
+```bash
+python greet_script.py
+```
+
+**Expected output:**
+
+```text
+Hello, Student!
+This is script mode execution.
+```
+
+**Explanation:** The interpreter reads the entire file, defines the `greet` function, calls it with the argument `"Student"`, stores the result in `message`, and then executes both `print` statements in order. The entire program runs as a single unit.
+
+### Example 2: Interactive Mode
+
+Start the interpreter without a file:
+
+```bash
+python
+```
+
+**Interactive session:**
+
+```python
+>>> 2 + 3
+5
+>>> name = "Student"
+>>> f"Hello, {name}!"
+'Hello, Student!'
+>>> for i in range(3):
+...     print(i)
+...
+0
+1
+2
+>>> exit()
+```
+
+**Explanation:** Each expression is evaluated and its result is displayed immediately. The variable `name` is created and persists throughout the session. The `for` loop is entered as a compound statement using the `...` continuation prompt, and a blank line signals its completion.
+
+---
+
+## Step-by-Step Execution
+
+### Script Mode Execution Trace (`greet_script.py`)
+
+| Step | Statement Executed | State / Output |
+|------|-------------------|----------------|
+| 1 | `def greet(name):` | Function `greet` is defined |
+| 2 | `return f"Hello, {name}!"` | Function body is stored (not executed yet) |
+| 3 | `message = greet("Student")` | `greet` is called; `message = "Hello, Student!"` |
+| 4 | `print(message)` | Output: `Hello, Student!` |
+| 5 | `print("This is script mode execution.")` | Output: `This is script mode execution.` |
+| 6 | End of file | Program terminates |
+
+### Interactive Mode Execution Trace
+
+| Step | Input | State / Output |
+|------|-------|----------------|
+| 1 | `2 + 3` | Expression evaluated; output: `5` |
+| 2 | `name = "Student"` | Variable `name` created; no output |
+| 3 | `f"Hello, {name}!"` | Expression evaluated; output: `'Hello, Student!'` |
+| 4 | `for i in range(3):` | Compound statement begins; prompt becomes `...` |
+| 5 | `    print(i)` | Loop body added; prompt remains `...` |
+| 6 | (blank line) | Loop executes; outputs: `0`, `1`, `2` |
+| 7 | `exit()` | Interpreter exits |
+
+---
+
+## Advantages, Disadvantages, and Applications
+
+### Script Mode
+
+**Advantages:**
+- Promotes organized and structured programming.
+- Code can be saved, reused, and shared easily.
+- Suitable for large projects and complex logic.
+- Easier to test and debug individual functions.
+- Ideal for automation and repetitive tasks.
+
+**Disadvantages:**
+- Steeper learning curve for beginners.
+- Requires saving and running the entire file for testing changes.
+- Debugging large scripts can be challenging.
+
+**Applications:**
+- Building complete applications and tools.
+- Data processing scripts.
+- Automation of repetitive tasks.
+- Creating reusable modules and packages.
+
+### Interactive Mode
+
+**Advantages:**
+- Immediate feedback for each statement.
+- Excellent for learning and experimentation.
+- No need to create files for quick tests.
+- Simplifies debugging of small code fragments.
+
+**Disadvantages:**
+- Lacks structured organization.
+- Not suitable for large programs.
+- Code is not saved unless explicitly copied.
+- Compound statements are harder to edit.
+
+**Applications:**
+- Learning Python syntax and concepts.
 - Testing small code snippets.
-- Performing calculations.
-- Experimenting with built-in functions and libraries.
+- Using Python as a calculator.
+- Quick debugging of expressions.
 
-## 3. Script Mode
+---
 
-### Definition
+## Comparison Table: Script Mode vs Interactive Mode
 
-Script mode is a method of executing Python code by writing the program in a file, saving it with the `.py` extension, and running that file using the Python interpreter.
+| Feature | Script Mode | Interactive Mode |
+|---------|------------|------------------|
+| **How to start** | `python file.py` | `python` (no file) |
+| **Input source** | File (`.py` extension) | Terminal (keyboard input) |
+| **Execution style** | Entire program at once | One statement at a time |
+| **Prompt** | None (runs silently) | `>>>` and `...` |
+| **Feedback** | After program runs | Immediately per statement |
+| **Code persistence** | Saved in file | Lost when session ends |
+| **Best for** | Complete programs, projects | Quick tests, learning |
+| **Error behavior** | Exits with stack trace | Returns to `>>>` prompt |
+| **Multi-line statements** | Natural (indentation) | Need blank line to end |
+| **Typical use case** | Development, production | Experimentation, debugging |
 
-It is commonly used to develop complete programs, assignments, and applications. [Source: Python Documentation — Using the Python Interpreter](https://docs.python.org/3/tutorial/interpreter.html).
+---
 
-### Diagram
+## Important Points to Remember
 
-\#chatgpt-mermaid-\_r_33u\_{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;fill:rgb(237, 237, 237);}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#chatgpt-mermaid-\_r_33u\_ .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_33u\_ .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#chatgpt-mermaid-\_r_33u\_ .error-icon{fill:rgb(48, 48, 48);}#chatgpt-mermaid-\_r_33u\_ .error-text{fill:rgb(237, 237, 237);stroke:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ .edge-thickness-normal{stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .edge-thickness-thick{stroke-width:3.5px;}#chatgpt-mermaid-\_r_33u\_ .edge-pattern-solid{stroke-dasharray:0;}#chatgpt-mermaid-\_r_33u\_ .edge-thickness-invisible{stroke-width:0;fill:none;}#chatgpt-mermaid-\_r_33u\_ .edge-pattern-dashed{stroke-dasharray:3;}#chatgpt-mermaid-\_r_33u\_ .edge-pattern-dotted{stroke-dasharray:2;}#chatgpt-mermaid-\_r_33u\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33u\_ .marker.cross{stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33u\_ svg{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:16px;}#chatgpt-mermaid-\_r_33u\_ p{margin:0;}#chatgpt-mermaid-\_r_33u\_ .label{font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ .cluster-label text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ .cluster-label span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ .cluster-label span p{background-color:transparent;}#chatgpt-mermaid-\_r_33u\_ .label text,#chatgpt-mermaid-\_r_33u\_ span{fill:rgb(237, 237, 237);color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ .node rect,#chatgpt-mermaid-\_r_33u\_ .node circle,#chatgpt-mermaid-\_r_33u\_ .node ellipse,#chatgpt-mermaid-\_r_33u\_ .node polygon,#chatgpt-mermaid-\_r_33u\_ .node path{fill:rgb(17, 40, 19);stroke:rgb(58, 132, 63);stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .rough-node .label text,#chatgpt-mermaid-\_r_33u\_ .node .label text,#chatgpt-mermaid-\_r_33u\_ .image-shape .label,#chatgpt-mermaid-\_r_33u\_ .icon-shape .label{text-anchor:middle;}#chatgpt-mermaid-\_r_33u\_ .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .rough-node .label,#chatgpt-mermaid-\_r_33u\_ .node .label,#chatgpt-mermaid-\_r_33u\_ .image-shape .label,#chatgpt-mermaid-\_r_33u\_ .icon-shape .label{text-align:center;}#chatgpt-mermaid-\_r_33u\_ .node.clickable{cursor:pointer;}#chatgpt-mermaid-\_r_33u\_ .root .anchor path{fill:rgb(175, 175, 175)!important;stroke-width:0;stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33u\_ .arrowheadPath{fill:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33u\_ .edgePath .path{stroke:rgb(175, 175, 175);stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .flowchart-link{stroke:rgb(175, 175, 175);fill:none;}#chatgpt-mermaid-\_r_33u\_ .edgeLabel{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_33u\_ .edgeLabel p{background-color:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_33u\_ .edgeLabel rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_33u\_ .labelBkg{background-color:rgba(0, 0, 0, 0.5);}#chatgpt-mermaid-\_r_33u\_ .cluster rect{fill:rgb(48, 48, 48);stroke:rgba(255, 255, 255, 0.15);stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .cluster text{fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ .cluster span{color:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";font-size:12px;background:rgb(48, 48, 48);border:1px solid rgba(255, 255, 255, 0.15);border-radius:2px;pointer-events:none;z-index:100;}#chatgpt-mermaid-\_r_33u\_ .flowchartTitleText{text-anchor:middle;font-size:18px;fill:rgb(237, 237, 237);}#chatgpt-mermaid-\_r_33u\_ rect.text{fill:none;stroke-width:0;}#chatgpt-mermaid-\_r_33u\_ .icon-shape,#chatgpt-mermaid-\_r_33u\_ .image-shape{background-color:rgb(0, 0, 0);text-align:center;}#chatgpt-mermaid-\_r_33u\_ .icon-shape p,#chatgpt-mermaid-\_r_33u\_ .image-shape p{background-color:rgb(0, 0, 0);padding:2px;}#chatgpt-mermaid-\_r_33u\_ .icon-shape .label rect,#chatgpt-mermaid-\_r_33u\_ .image-shape .label rect{opacity:0.5;background-color:rgb(0, 0, 0);fill:rgb(0, 0, 0);}#chatgpt-mermaid-\_r_33u\_ .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#chatgpt-mermaid-\_r_33u\_ .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#chatgpt-mermaid-\_r_33u\_ .node .neo-node{stroke:rgb(58, 132, 63);}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node rect,#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].cluster rect,#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node polygon{stroke:url(#chatgpt-mermaid-\_r_33u\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].swimlane.cluster rect{filter:none;}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node path{stroke:url(#chatgpt-mermaid-\_r_33u\_-gradient);stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node .outer-path{filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node .neo-line path{stroke:rgb(58, 132, 63);filter:none;}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node circle{stroke:url(#chatgpt-mermaid-\_r_33u\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].node circle .state-start{fill:#000000;}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].icon-shape .icon{fill:url(#chatgpt-mermaid-\_r_33u\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33u\_ [data-look="neo"].icon-shape .icon-neo path{stroke:url(#chatgpt-mermaid-\_r_33u\_-gradient);filter:drop-shadow( 1px 2px 2px rgba(185,185,185,1));}#chatgpt-mermaid-\_r_33u\_ .node text{font-size:14px;font-weight:600;letter-spacing:normal;fill:rgb(140, 223, 173);}#chatgpt-mermaid-\_r_33u\_ .edgeLabels text{font-size:13px;font-weight:600;letter-spacing:-0.08px;fill:rgb(140, 223, 173);}#chatgpt-mermaid-\_r_33u\_ .node tspan[font-weight="normal"],#chatgpt-mermaid-\_r_33u\_ .edgeLabels tspan[font-weight="normal"]{font-weight:600;}#chatgpt-mermaid-\_r_33u\_ .edgeLabel .label rect{opacity:1;rx:13px;ry:13px;fill:rgb(2, 28, 12);stroke:rgb(26, 75, 45);stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .node rect,#chatgpt-mermaid-\_r_33u\_ .node circle,#chatgpt-mermaid-\_r_33u\_ .node ellipse,#chatgpt-mermaid-\_r_33u\_ .node polygon,#chatgpt-mermaid-\_r_33u\_ .node path{fill:rgb(0, 55, 22);stroke:rgba(255, 255, 255, 0.1);stroke-width:1px;}#chatgpt-mermaid-\_r_33u\_ .node rect{rx:16px;ry:16px;}#chatgpt-mermaid-\_r_33u\_ .node.mermaid-decision .label-container{fill:rgb(2, 28, 12);stroke:rgb(26, 75, 45);stroke-dasharray:2px,2px;}#chatgpt-mermaid-\_r_33u\_ .edgePaths .flowchart-link{stroke:rgb(175, 175, 175);stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;}#chatgpt-mermaid-\_r_33u\_ .marker{fill:rgb(175, 175, 175);stroke:rgb(175, 175, 175);}#chatgpt-mermaid-\_r_33u\_ :root{--mermaid-font-family:-apple-system-body,ui-sans-serif,-apple-system,system-ui,"Segoe UI","Helvetica","Apple Color Emoji","Arial",sans-serif,"Segoe UI Emoji","Segoe UI Symbol";}Write Python ProgramSave as program.pyRun File Using PythonInterpreterExecute Program StatementsDisplay Output
+- **Script mode** executes a complete program from a `.py` file; **interactive mode** executes statements one at a time from the terminal.
+- The primary prompt in interactive mode is `>>>`; the continuation prompt is `...`.
+- In interactive mode, a **top-level compound statement must be followed by a blank line** to mark its end.
+- You exit interactive mode with `exit()`, `quit()`, or `Ctrl-D`/`Ctrl-Z`.
+- Script mode is invoked with `python script.py`; interactive mode with just `python`.
+- The interpreter enters interactive mode when standard input is connected to a **tty device** (terminal); otherwise, it treats input as a complete program.
+- Scripts are the predominant way of writing Python programs because they can be saved, shared, and version-controlled.
 
-Explanation: The programmer writes the code in a file, saves it, and runs the file. Python executes the program, and any requested output is displayed.
+---
 
-### Example
+## Conclusion
 
-Step 1: Create a file named `hello.py`.
+Python provides two distinct execution modes to suit different stages of development. **Script mode** is the professional choice for building, testing, and distributing complete programs. It offers structure, reusability, and support for complex logic. **Interactive mode** is the learning and experimentation tool, offering instant feedback and a frictionless environment for testing ideas. A proficient Python programmer uses both: interactive mode for exploration and quick verification, and script mode for building real applications. Together, these two modes make Python both an accessible learning language and a powerful development platform.
 
-Write the following code:
+---
 
-```
-name = "Student"age = 20print("Hello,", name)print("Your age is", age)
-```
+## References
 
-Step 2: Save the file.
+1. **Python Documentation — Using the Python Interpreter (Tutorial)**  
+   Python Software Foundation.  
+   https://docs.python.org/3/tutorial/interpreter.html  
+   *Supports: Interactive mode definition, prompts, invoking the interpreter, script execution, exiting.*
 
-Save the program as `hello.py`.
+2. **Python Documentation — Top-level Components (Language Reference)**  
+   Python Software Foundation.  
+   https://docs.python.org/3/reference/toplevel_components.html  
+   *Supports: Complete program vs interactive mode distinction, execution environment, input forms.*
 
-Step 3: Execute the program.
+3. **Scaler Topics — Script Mode vs Interactive Mode in Python**  
+   Scaler.  
+   https://www.scaler.com/topics/interactive-mode-and-script-mode-in-python/  
+   *Supports: Advantages, disadvantages, and practical workflow of both modes.*
 
-Open a terminal in the directory containing the file and enter:
+4. **Python Documentation — Python on Windows FAQ**  
+   Python Software Foundation.  
+   https://docs.python.org/3.11/faq/windows.html  
+   *Supports: Windows-specific commands (`py`), starting interactive mode, running scripts on Windows.*
 
-```
-python hello.py
-```
-
-Depending on your operating system and installation, you may need to use `python3 hello.py` or `py hello.py`.
-
-Step 4: Observe the output.
-
-```
-Hello, Student
-Your age is 20
-```
-
-### Step-by-Step Execution
-
-| Step | Statement                   | Explanation                                           |
-| ---- | --------------------------- | ----------------------------------------------------- |
-| 1    | `name = "Student"`          | Stores the string `"Student"` in the variable `name`. |
-| 2    | `age = 20`                  | Stores the integer `20` in the variable `age`.        |
-| 3    | `print("Hello,", name)`     | Displays the greeting and name.                       |
-| 4    | `print("Your age is", age)` | Displays the age.                                     |
-
-### Characteristics
-
-- The program is written in a file, usually ending in `.py`.
-- Multiple statements can be organized into a complete program.
-- Code can be saved, edited, shared, and reused.
-- Programs can be executed repeatedly.
-- Suitable for larger applications and programming assignments.
-
-### Advantages
-
-- Easy to save and maintain code.
-- Suitable for large programs.
-- Supports functions, classes, and modules.
-- Makes code reuse and debugging easier.
-- Useful for developing applications and automation scripts.
-
-### Disadvantages
-
-- Requires writing and saving a file before execution.
-- Testing a simple expression may take more steps than interactive mode.
-- Errors may require modifying the file and running the program again.
-
-### Applications
-
-- University programming assignments.
-- Application development.
-- Automation and data processing.
-- Programs containing multiple functions and classes.
-
-## 4. Difference Between Interactive Mode and Script Mode
-
-| Basis           | Interactive Mode                                                | Script Mode                                     |
-| --------------- | --------------------------------------------------------------- | ----------------------------------------------- |
-| Definition      | Executes code entered directly into the interpreter.            | Executes code saved in a Python file.           |
-| Input           | Entered at the Python prompt.                                   | Written in a `.py` file.                        |
-| Execution       | Commands execute interactively.                                 | The saved file is executed by the interpreter.  |
-| Output          | Expression results are displayed automatically.                 | Use `print()` to display results when required. |
-| Saving          | Session input is not automatically saved as a reusable program. | Source code is saved in a file.                 |
-| Best suited for | Learning and quick experiments.                                 | Complete programs and applications.             |
-| Reusability     | Commands may need to be saved separately.                       | The saved program can be run repeatedly.        |
-| Example         | `>>> 5 + 3`                                                     | `python program.py`                             |
-
-Important difference: In interactive mode, entering `5 + 3` displays `8` automatically. In a Python script, writing `5 + 3` alone does not normally display the result. To display it, write `print(5 + 3)`.
-
-## 5. Important Points to Remember for Examinations
-
-1. Python has two common execution modes: Interactive Mode and Script Mode.
-2. Interactive mode is also known as REPL — Read, Eval, Print, Loop.
-3. The `>>>` symbol is the standard interactive prompt.
-4. Script mode uses a file with the `.py` extension.
-5. The command `python program.py` is commonly used to execute a Python script.
-6. Interactive mode is useful for quick testing, while script mode is suitable for complete programs.
-7. Both modes use the Python interpreter to execute Python code.
-
-## 6. Conclusion
-
-Python provides two common ways to execute programs. Interactive mode allows programmers to enter commands and see results immediately, making it useful for learning and testing. Script mode allows programmers to save code in `.py` files and execute complete programs, making it suitable for assignments and application development.
-
-## 7. References
-
-1. Python Software Foundation — Using the Python Interpreter [https://docs.python.org/3/tutorial/interpreter.html](https://docs.python.org/3/tutorial/interpreter.html) Explains interactive mode, interpreter prompts, and executing Python scripts.
-2. Python Software Foundation — Command-Line and Environment [https://docs.python.org/3/using/cmdline.html](https://docs.python.org/3/using/cmdline.html) Explains how to invoke Python and execute scripts from the command line.
+5. **GitHub — Python Modes (CSE 163, University of Washington)**  
+   https://cse163.github.io/book/module-2-data-structures-and-files/lesson-4-lists-and-files/python-modes.html  
+   *Supports: REPL concept, interactive mode usage, comparison with script mode.*
