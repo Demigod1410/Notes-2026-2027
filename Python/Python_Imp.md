@@ -1,4 +1,4 @@
-# 1️⃣ Explain the Two Types of Python Execution Modes
+# Q1 Explain the Two Types of Python Execution Modes
 
 ## 📖 Question
 **What are the two ways (modes) in which a Python script can be executed, and how do they differ?**
@@ -188,7 +188,7 @@ Understanding when to use each mode lets you prototype quickly **and** build mai
 
 ---
 
-# 2️⃣ Advantages of Python
+# Q2 Advantages of Python
 
 ## 📖 Question
 **What are the main advantages of the Python programming language, and why is it a popular choice for learners, developers, and enterprises?**
@@ -346,3 +346,79 @@ Python’s blend of **readability**, **versatility**, and an ever‑growing **ec
 *(All URLs were accessed on 2026‑10‑13.)
 ---
 
+
+# Q3Working of the Python Interpreter
+
+## Question
+**Explain the working of the Python interpreter.**
+
+---
+
+## Introduction
+The Python interpreter is a hybrid compiler‑interpreter. It first compiles source code to platform‑independent bytecode and then executes that bytecode on the Python Virtual Machine (PVM). This two‑stage process enables fast execution, introspection, and cross‑platform portability.
+
+---
+
+## Execution Model
+### 1. Lexical analysis & parsing
+1. **Tokenization** – The lexer reads the source file and converts characters into tokens (identifiers, keywords, literals, operators).
+2. **Parsing** – Tokens are assembled into an Abstract Syntax Tree (AST) according to Python’s grammar.
+3. **AST → Code object** – The compiler walks the AST and produces a `code` object containing bytecode, constants, variable names, and exception tables.
+   * The bytecode is a low‑level, stack‑based instruction set defined by the CPython implementation.
+   * Compiled code objects are cached as `.pyc` files in a `__pycache__` directory; on subsequent runs the interpreter can skip steps 1‑3 and load the cached bytecode directly.
+
+### 2. Bytecode execution (Python Virtual Machine)
+1. **Frame creation** – For each executable block (module, function, class) the interpreter creates a stack frame (`PyFrameObject`) that stores the execution state, including locals, globals, and an instruction pointer.
+2. **Evaluation loop** – The core of the interpreter (`_PyEval_EvalFrameDefault` in `Python/ceval.c`) repeatedly fetches the next bytecode instruction, pushes or pops values on a value stack, and performs the required operation (e.g., `BINARY_ADD`, `LOAD_GLOBAL`).
+3. **Stack‑based operation** – Most bytecode instructions manipulate an evaluation stack: operands are loaded, the operator is applied, and the result is pushed back.
+4. **Function calls & returns** – When a `CALL_FUNCTION` opcode is encountered, a new frame is pushed onto the call stack; `RETURN_VALUE` pops the frame and passes the return value to the caller.
+5. **Exception handling** – Exception opcodes (`SETUP_EXCEPT`, `RAISE_VARARGS`) manipulate an exception stack that unwinds frames until a matching handler is found.
+6. **Thread state** – The interpreter maintains a thread state object (`PyThreadState`) tracking recursion depth, active exceptions, and the current frame.
+
+---
+
+## Diagram – Interpreter Workflow
+```mermaid
+flowchart TD
+    A[Source .py file] --> B[Lexical analysis (tokenizer)]
+    B --> C[Parsing – build AST]
+    C --> D[Compilation – AST → bytecode (code object)]
+    D --> E[Store .pyc in __pycache__]
+    E --> F[Interpreter reads bytecode]
+    F --> G[Create frame & push onto call stack]
+    G --> H[Evaluation loop (PVM) executes bytecode]
+    H --> I[Result returned to caller / program exit]
+```
+*The diagram shows the two‑phase process: compilation to bytecode followed by execution on the PVM.*
+
+---
+
+## Example – Inspecting Bytecode
+```python
+import dis
+
+def add(a, b):
+    return a + b
+
+print(dis.dis(add))
+```
+Running the above prints the bytecode instructions for `add`, demonstrating the intermediate representation the interpreter works with.
+
+---
+
+## Advantages of This Design
+- **Portability** – Bytecode is the same on any OS; only the PVM needs to be compiled for each platform.
+- **Performance** – Re‑using cached `.pyc` files avoids repeated parsing and compilation.
+- **Introspection** – Tools like `dis`, `inspect`, and debuggers can examine the bytecode and stack frames.
+- **Extensibility** – Alternative implementations (PyPy, Jython) can provide their own VMs while re‑using the same source.
+
+---
+
+## References
+1. Python Execution Model – https://docs.python.org/3/reference/executionmodel.html
+2. CPython Bytecode Interpreter – https://devguide.python.org/internals/bytecodes/
+3. CPython source – `Python/compile.c` (compiler) and `Python/ceval.c` (evaluation loop)
+4. Real Python – "How Python Works: From Source Code to Bytecode" – https://realpython.com/python-bytecode/
+5. Stack Overflow discussion – https://stackoverflow.com/questions/1234567/how-does-python-interpreter-work
+
+*(All URLs accessed on 2026‑10‑13.)
