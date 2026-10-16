@@ -32,9 +32,10 @@
 ### 1.3 Module-Level Synthesis
 
 > **🔑 Key Takeaway (three-way bridge):**
-> 1.  **The WebGoat lab operationalises the dotDefender threat list.** The whitepaper's "jamming the application-database connection by crafting CPU-intensive SQL queries" and its "database connection pool" (a listed attackable service) are exactly what the lab performs — injection first to *get* credentials, then concurrency to *exhaust* the pool.
-> 2.  **DoS is the Availability pillar; non-repudiation is the Accountability pillar** (the fourth goal in the earlier BMA/Müller–Rannenberg taxonomy). Both are guarded by earlier mechanics: DoS by WAFs/segmentation (Security Mechanisms notes), non-repudiation by **digital signatures** (Asymmetric Encryption Ch. 9–10) — *"only the true sender can produce this signature."*
-> 3.  **Motive economics matured:** the SANS paper traced protest/business rivalry (Yahoo 2000, FARC 2008); dotDefender adds **extortion-for-profit** as the modern criminal model — the hacktivist-to-cybercrime shift.
+>
+> 1. **The WebGoat lab operationalises the dotDefender threat list.** The whitepaper's "jamming the application-database connection by crafting CPU-intensive SQL queries" and its "database connection pool" (a listed attackable service) are exactly what the lab performs — injection first to *get* credentials, then concurrency to *exhaust* the pool.
+> 2. **DoS is the Availability pillar; non-repudiation is the Accountability pillar** (the fourth goal in the earlier BMA/Müller–Rannenberg taxonomy). Both are guarded by earlier mechanics: DoS by WAFs/segmentation (Security Mechanisms notes), non-repudiation by **digital signatures** (Asymmetric Encryption Ch. 9–10) — *"only the true sender can produce this signature."*
+> 3. **Motive economics matured:** the SANS paper traced protest/business rivalry (Yahoo 2000, FARC 2008); dotDefender adds **extortion-for-profit** as the modern criminal model — the hacktivist-to-cybercrime shift.
 
 ```mermaid
 flowchart TD
@@ -59,21 +60,21 @@ flowchart TD
 
 **Symptoms of DoS (six listed; note "unavailability of a particular web site" appears twice):**
 
-1.  **Unusually slow network performance.**
-2.  **Unavailability of a particular web site.**
-3.  **Inability to access any web site.**
-4.  **Dramatic increase in the number of spam emails received.**
-5.  **Long-term denial of access to the web or any Internet services.**
-6.  Unavailability of a particular web site. *(repeated)*
+1. **Unusually slow network performance.**
+2. **Unavailability of a particular web site.**
+3. **Inability to access any web site.**
+4. **Dramatic increase in the number of spam emails received.**
+5. **Long-term denial of access to the web or any Internet services.**
+6. Unavailability of a particular web site. *(repeated)*
 
 > **💡 Enrichment (reading the symptoms operationally):** items 2–3 & 6 are the *customer-visible* outage; item 1 is the *pre-collapse* warning sign an administrator can alert on; item 4 (spam flood) reflects **spam as a volumetric DoS vector on mail infrastructure**. Together they form a monitoring checklist — the "immediate anomaly alerts" that the commercial anti-DoS vendors (VeriSign/Arbor, earlier notes) promise.
 
 **Hands ON — WebGoat lab (steps 1–3 on page 1):**
 
-*   **Step 1 — Launch WebGoat** (OWASP's deliberately insecure training application) and navigate to the **'Denial of Service'** section. Scenario statement: *"If the end user cannot conduct business or perform the service offered by the web application, then both time and money is wasted."*
-    *   **General Goal(s):** *"This site allows a user to login multiple times. This site has a **database connection pool that allows 2 connections**. You must obtain a list of valid users and create a **total of 3 logins**."*
-*   **Step 2 — Obtain the list of valid logins using SQL Injection** (the username payload shown: `try' or '1'='1`).
-*   **Step 3 — If the attempt is successful, it displays all valid credentials to the user.**
+* **Step 1 — Launch WebGoat** (OWASP's deliberately insecure training application) and navigate to the **'Denial of Service'** section. Scenario statement: *"If the end user cannot conduct business or perform the service offered by the web application, then both time and money is wasted."*
+  * **General Goal(s):** *"This site allows a user to login multiple times. This site has a **database connection pool that allows 2 connections**. You must obtain a list of valid users and create a **total of 3 logins**."*
+* **Step 2 — Obtain the list of valid logins using SQL Injection** (the username payload shown: `try' or '1'='1`).
+* **Step 3 — If the attempt is successful, it displays all valid credentials to the user.**
 
 ### Page 2 — The Injection Revealed, Pool Exhaustion, Prevention
 
@@ -116,9 +117,9 @@ flowchart TD
 
 **Preventing Mechanisms (verbatim list):**
 
-1.  **Perform thorough input validations** — *"it is always better to expect worst case scenarios."*
-2.  **Avoid highly CPU-consuming operations.**
-3.  *"It is better to **separate data disks from system disks**."*
+1. **Perform thorough input validations** — *"it is always better to expect worst case scenarios."*
+2. **Avoid highly CPU-consuming operations.**
+3. *"It is better to **separate data disks from system disks**."*
 
 > **💡 Enrichment (map to the earlier secure-SDLC checklist):** mechanism 1 = **Input Validation** (OWASP principle #1) and kills the *enabler* (injection); mechanism 2 = **resource governance** — timeouts, query cost limits, pool sizing, rate limiting — kills the *effect*; mechanism 3 = **disk-space isolation** so a log/data flood (disk-space DoS per dotDefender's target list) cannot take down the OS partition. A 4th modern control: **never allow unbounded concurrent sessions per credential** (session management principle #4).
 
@@ -161,32 +162,32 @@ flowchart LR
 
 ### Page 2 — Definition, Impact, Web-App Examples
 
-*   **Definition (web context):** *"DoS attacks against web sites occur when an attacker attempts to make the web server, or servers, **unavailable to serve up the web sites they host to legitimate visitors**."*
-*   **Shifting victim profile:** *"For some time, it was thought these attacks were generally used against large corporations, government sites, and activist sites as a form of protest to disrupt their web presence. However, **more small and medium businesses** are beginning to see their online presence disrupted."*
-*   **Business stakes:** *"Application DoS attacks have rapidly become a **commonplace threat for doing business on the Internet** — more proof that **Web application security is more critical now than ever**."* Attacks cause *"significant loss of **service, money and reputation**."*
-*   **Loss shapes:** inability of a particular network service (e.g., **e-mail**) to be available; **temporary loss of all network connectivity and services**; *"an **HTTP DoS attack can also destroy programming and files** in affected computer systems"*; *"in some cases, HTTP DoS attacks have forced web sites accessed by **millions of people** to temporarily cease operation."*
-*   **Three example attack patterns against web applications:**
-    1.  **"Flood" the web application** — preventing legitimate user traffic.
-    2.  **Disrupt service to a specific system or person** — e.g., **blocking user access by repeated invalid login attempts resulting in the account's suspension** *(a targeted lockout DoS)*.
-    3.  **Jamming the application–database connection** by crafting **CPU-intensive SQL queries**. *(← the WebGoat lab in the wild)*
-*   **Risk concept:** *"DoS attacks are centered around the concept that by **overloading a target's resources, the system will ultimately crash**"* — the software is overloaded and *"the application fails to serve web pages properly."* First attackable service: **Network bandwidth** *(continues)*.
+* **Definition (web context):** *"DoS attacks against web sites occur when an attacker attempts to make the web server, or servers, **unavailable to serve up the web sites they host to legitimate visitors**."*
+* **Shifting victim profile:** *"For some time, it was thought these attacks were generally used against large corporations, government sites, and activist sites as a form of protest to disrupt their web presence. However, **more small and medium businesses** are beginning to see their online presence disrupted."*
+* **Business stakes:** *"Application DoS attacks have rapidly become a **commonplace threat for doing business on the Internet** — more proof that **Web application security is more critical now than ever**."* Attacks cause *"significant loss of **service, money and reputation**."*
+* **Loss shapes:** inability of a particular network service (e.g., **e-mail**) to be available; **temporary loss of all network connectivity and services**; *"an **HTTP DoS attack can also destroy programming and files** in affected computer systems"*; *"in some cases, HTTP DoS attacks have forced web sites accessed by **millions of people** to temporarily cease operation."*
+* **Three example attack patterns against web applications:**
+    1. **"Flood" the web application** — preventing legitimate user traffic.
+    2. **Disrupt service to a specific system or person** — e.g., **blocking user access by repeated invalid login attempts resulting in the account's suspension** *(a targeted lockout DoS)*.
+    3. **Jamming the application–database connection** by crafting **CPU-intensive SQL queries**. *(← the WebGoat lab in the wild)*
+* **Risk concept:** *"DoS attacks are centered around the concept that by **overloading a target's resources, the system will ultimately crash**"* — the software is overloaded and *"the application fails to serve web pages properly."* First attackable service: **Network bandwidth** *(continues)*.
 
 ### Page 3 — The Six Attackable Services, Motives, WAF Introduction
 
 **Full list of services a DoS threat attacks to crash a web server:**
 
-1.  **Network bandwidth** *(from p. 2)*
-2.  **Server memory**
-3.  **Application exception handling mechanism**
-4.  **CPU usage**
-5.  **Hard disk space**
-6.  **Database space**
-7.  **Database connection pool**
+1. **Network bandwidth** *(from p. 2)*
+2. **Server memory**
+3. **Application exception handling mechanism**
+4. **CPU usage**
+5. **Hard disk space**
+6. **Database space**
+7. **Database connection pool**
 
 > **💡 Cross-link:** **#7 — the database connection pool — is precisely the WebGoat lab's target** (3 logins vs 2 connections). **#3 — the exception-handling mechanism — matches dotDefender's later "malformed data to raise unexpected exceptions."** The list is the syllabus of application-layer DoS.
 
-*   **The motive shift:** *"In the past, DoS attacks were thought to be a tool used by **hacktivists as a form of protest**. However, recent attacks have shown that DoS attacks can also be a way for **cyber criminals to profit**."*
-*   **By not proactively preventing DoS, you leave your site vulnerable to five outcomes:**
+* **The motive shift:** *"In the past, DoS attacks were thought to be a tool used by **hacktivists as a form of protest**. However, recent attacks have shown that DoS attacks can also be a way for **cyber criminals to profit**."*
+* **By not proactively preventing DoS, you leave your site vulnerable to five outcomes:**
 
 | Outcome | Detail (verbatim-condensed) |
 | :--- | :--- |
@@ -198,28 +199,28 @@ flowchart LR
 
 > **🔑 Cross-link:** extortion and sabotage complete the motive map from the SANS paper (protest, rivalry, content objection, money, ego) — and "information gathered… used later" frames DoS as **reconnaissance cover**: flooding while probing (cf. kill-chain stage 1).
 
-*   **Prevention pivot — dotDefender WAF:** *"you can avoid DoS attacks because dotDefender **inspects your HTTP traffic and checks their packets against rules** such as to **allow or deny protocols, ports, or IP addresses** to stop web applications from being exploited. **Architected as plug & play software**, dotDefender provides optimal **out-of-the-box protection against DoS threats, cross-site scripting, SQL Injection attacks, path traversal and many other web attack techniques**."*
+* **Prevention pivot — dotDefender WAF:** *"you can avoid DoS attacks because dotDefender **inspects your HTTP traffic and checks their packets against rules** such as to **allow or deny protocols, ports, or IP addresses** to stop web applications from being exploited. **Architected as plug & play software**, dotDefender provides optimal **out-of-the-box protection against DoS threats, cross-site scripting, SQL Injection attacks, path traversal and many other web attack techniques**."*
 
 ### Page 4 — WAF Selling Points, Launch Methods, Classic Tactics
 
 **Why dotDefender offers a comprehensive solution (five claimed reasons):**
 
-1.  **Easy installation on Apache and IIS servers.**
-2.  **Strong security against known and emerging hacking attacks.**
-3.  **Best-of-breed predefined security rules for instant protection.**
-4.  **Interface and API for managing multiple servers with ease.**
-5.  **Requires no additional hardware, and easily scales with your business.**
+1. **Easy installation on Apache and IIS servers.**
+2. **Strong security against known and emerging hacking attacks.**
+3. **Best-of-breed predefined security rules for instant protection.**
+4. **Interface and API for managing multiple servers with ease.**
+5. **Requires no additional hardware, and easily scales with your business.**
 
 **How does an attacker launch a DoS attack?** *"Many different ways — ranging from simply **unplugging a server from the network (if they have physical access)** to coordinating **large armies of zombie computers** to launch a large-scale distributed attack"* using:
 
-1.  **Buffer overflows in the application functions**
-2.  **Malformed data to raise unexpected exceptions** *(→ crashes the exception-handling mechanism)*
-3.  **Exploited race conditions in multi-threaded systems**
-4.  **Heavy-duty SQL queries via web forms and "spamming" them with requests** — e.g., **inserting `%` characters within search query fields** *(forcing wildcard scans on the DB)*
-5.  **SQL Injection attacks executing recursive CPU-intensive queries**
-6.  **The end users' web browsers to overload the application with parallel requests via persistent / reflected Cross-Site Scripting attacks** *(turning every visitor's browser into an unwitting attacker)*
-7.  **Overly-complex regular expressions within search queries** *(enrichment: the **ReDoS** pattern — catastrophic regex backtracking)*
-8.  **Excessively large files uploaded to the server**
+1. **Buffer overflows in the application functions**
+2. **Malformed data to raise unexpected exceptions** *(→ crashes the exception-handling mechanism)*
+3. **Exploited race conditions in multi-threaded systems**
+4. **Heavy-duty SQL queries via web forms and "spamming" them with requests** — e.g., **inserting `%` characters within search query fields** *(forcing wildcard scans on the DB)*
+5. **SQL Injection attacks executing recursive CPU-intensive queries**
+6. **The end users' web browsers to overload the application with parallel requests via persistent / reflected Cross-Site Scripting attacks** *(turning every visitor's browser into an unwitting attacker)*
+7. **Overly-complex regular expressions within search queries** *(enrichment: the **ReDoS** pattern — catastrophic regex backtracking)*
+8. **Excessively large files uploaded to the server**
 
 > **🔑 Cross-link:** items 4–5 are the WebGoat lab's mechanics (injection → heavy queries); items 2–8 are all **application-level** (matching the SANS paper's "Application level Denial of Service"); item 6 (XSS-driven browser hordes) is a no-botnet variant that prefigures the Peer-to-Peer attack below.
 
@@ -227,8 +228,8 @@ flowchart LR
 
 > **(Also known as ICMP flood, Smurf attack, Ping of death, or SYN flood)**
 
-*   *"Ping flood works by sending the target an **overwhelming number of ping packets**, usually using the 'ping' command. It is **very simple to launch** and by creating traffic that **exceeds the web site's bandwidth availability, the attack is a success**."*
-*   **SYN flood:** *"sends a flood of TCP/SYN packets using a **forged sender address**. Since the sender address is not correct, the response in the form of a **TCP/SYN-ACK packet never comes, leaving a half-open connection**. As these…"* *(continues on page 5)*
+* *"Ping flood works by sending the target an **overwhelming number of ping packets**, usually using the 'ping' command. It is **very simple to launch** and by creating traffic that **exceeds the web site's bandwidth availability, the attack is a success**."*
+* **SYN flood:** *"sends a flood of TCP/SYN packets using a **forged sender address**. Since the sender address is not correct, the response in the form of a **TCP/SYN-ACK packet never comes, leaving a half-open connection**. As these…"* *(continues on page 5)*
 
 > **⚠️ Warning (terminology precision for exams):** this document **lumps four distinct attacks under one heading**. Per the SANS paper: **Ping flood** = volumetric echo requests; **Smurf** = reflective (broadcast + spoofed victim source); **Ping of Death** = corrupt/oversized packets that *crash*; **SYN flood** = half-open TCP state exhaustion. Treat the dotDefender grouping as a loose vendor heading; keep the distinctions sharp.
 
@@ -247,11 +248,11 @@ sequenceDiagram
 ```
 
 **Peer-to-peer attacks:**
-*   *"Launched when the attacker causes users to **disconnect from their peer-to-peer network and to connect to the victim's website instead**. Like a zombie or botnet attack, **several thousand computers may be trying to connect to the victim's site at once**. If enough machines are controlled by the attacker, the **overflow of connection requests can easily bring down a web application**."*
-*   **Key distinction:** *"Unlike zombie attacks, **there is no botnet** so the attacker does **not have to communicate** with the computers he uses to launch his attack."* — *(enrichment: the attacker only needs to **point the swarm** — historically done via poisoned P2P index/cache entries redirecting clients at the victim; command-and-control is replaced by misdirection, making it botnet-free yet botnet-scale.)*
+**"Launched when the attacker causes users to **disconnect from their peer-to-peer network and to connect to the victim's website instead**. Like a zombie or botnet attack, **several thousand computers may be trying to connect to the victim's site at once**. If enough machines are controlled by the attacker, the **overflow of connection requests can easily bring down a web application**."*
+***Key distinction:** *"Unlike zombie attacks, **there is no botnet** so the attacker does **not have to communicate** with the computers he uses to launch his attack."* — *(enrichment: the attacker only needs to **point the swarm** — historically done via poisoned P2P index/cache entries redirecting clients at the victim; command-and-control is replaced by misdirection, making it botnet-free yet botnet-scale.)*
 
 **Application level floods:**
-*   *"While **most DoS attacks exploit bandwidth**, some rely on **software-related exploits such as buffer overflows**. These attacks cause **confusion in the application**, causing it to **fill the disk space or consume all available memory or CPU cycles**."* *(← the disk/memory/CPU triad from the services list)*
+**"While **most DoS attacks exploit bandwidth**, some rely on **software-related exploits such as buffer overflows**. These attacks cause **confusion in the application**, causing it to **fill the disk space or consume all available memory or CPU cycles**."* *(← the disk/memory/CPU triad from the services list)*
 
 **The Need to Avoid DoS Attacks:** *"DoS attacks are often **random** when launched against **small and medium sized web sites**."* When the site is not a high-profile target (large corporation, government, activist site), the reason falls within one or more categories:
 
@@ -263,10 +264,10 @@ sequenceDiagram
 
 ### Page 6 — Bad Luck, The Three Security Engines
 
-*   **Bad Luck:** *"Sometimes there's **no apparent reason** for a DoS attack. An attacker may simply **pick a business's domain at random**, or because they **like the sound of its name or the way it looks**. Attackers, by nature, can be **highly irrational**."*
-*   **The unfair symmetry:** *"Unfortunately for the victim, attacks that are **unintentional yield many of the same results** as those that are launched against a specific target."* *(cf. the "unintended attacks still hurt" theme — availability loss is motive-agnostic.)*
-*   **Protect Yourself:** *"dotDefender's unique security approach **eliminates the need to learn the specific threats** that exist on each web application. The software focuses on **analyzing the request and the impact it has on the application**."*
-*   **Effective web application security is based on THREE powerful engines:**
+* **Bad Luck:** *"Sometimes there's **no apparent reason** for a DoS attack. An attacker may simply **pick a business's domain at random**, or because they **like the sound of its name or the way it looks**. Attackers, by nature, can be **highly irrational**."*
+* **The unfair symmetry:** *"Unfortunately for the victim, attacks that are **unintentional yield many of the same results** as those that are launched against a specific target."* *(cf. the "unintended attacks still hurt" theme — availability loss is motive-agnostic.)*
+* **Protect Yourself:** *"dotDefender's unique security approach **eliminates the need to learn the specific threats** that exist on each web application. The software focuses on **analyzing the request and the impact it has on the application**."*
+* **Effective web application security is based on THREE powerful engines:**
 
 ```mermaid
 flowchart LR
@@ -278,8 +279,8 @@ flowchart LR
     PR -.->|"a false positive generates the SAME<br/>end-result as a coordinated DoS threat"| FP["⚠ LOW FP RATE IS NON-NEGOTIABLE<br/>in DoS defence"]
 ```
 
-*   **Pattern Recognition in depth:** *"effectively protects against malicious behavior such as DoS attacks. The patterns are **regular expression-based** and designed to **efficiently and accurately identify a wide array of application-level attack methods**. As a result, dotDefender is characterized by an **extremely low false positive rate** — which is important when dealing with DoS attacks as **a false positive will generate the same end-result as a well coordinated DoS threat**."*
-*   **Closing claim:** *"What sets dotDefender apart is that it offers **comprehensive protection against DoS and other attacks while being one of the easiest solutions to use**."*
+* **Pattern Recognition in depth:** *"effectively protects against malicious behavior such as DoS attacks. The patterns are **regular expression-based** and designed to **efficiently and accurately identify a wide array of application-level attack methods**. As a result, dotDefender is characterized by an **extremely low false positive rate** — which is important when dealing with DoS attacks as **a false positive will generate the same end-result as a well coordinated DoS threat**."*
+* **Closing claim:** *"What sets dotDefender apart is that it offers **comprehensive protection against DoS and other attacks while being one of the easiest solutions to use**."*
 
 > **🔑 Key Takeaway (the false-positive paradox):** a WAF that blocks legitimate users **is itself a DoS**. This is why detection quality (precision/recall) is a *security* requirement, not just a UX nicety — and it connects to the IDS "false alarm" discussion in the Security Mechanisms notes, where anomaly detection and reputation filtering were introduced precisely to suppress false alarms.
 
@@ -402,8 +403,8 @@ flowchart LR
 
 ### 4.3 One-Line Recall Strings
 
-*   **WebGoat lab:** *"Inject `'or '1'='1'` to dump five logins, then open three concurrent sessions against a two-connection pool — validation, CPU limits, and disk separation are the fix."*
-*   **dotDefender:** *"DoS overloads seven resources until the app crashes — profit replaced protest (extortion, sabotage, brand damage); defend with a WAF whose three engines analyse request impact, because in DoS defence a false positive IS a DoS."*
-*   **Non-repudiation:** *"To repudiate is to deny — registered mail and witnesses did it on paper; the digital signature (only one person can create it) does it online, but pair it with biometrics because nothing is absolutely fool-proof."*
+* **WebGoat lab:** *"Inject `'or '1'='1'` to dump five logins, then open three concurrent sessions against a two-connection pool — validation, CPU limits, and disk separation are the fix."*
+* **dotDefender:** *"DoS overloads seven resources until the app crashes — profit replaced protest (extortion, sabotage, brand damage); defend with a WAF whose three engines analyse request impact, because in DoS defence a false positive IS a DoS."*
+* **Non-repudiation:** *"To repudiate is to deny — registered mail and witnesses did it on paper; the digital signature (only one person can create it) does it online, but pair it with biometrics because nothing is absolutely fool-proof."*
 
 ---
