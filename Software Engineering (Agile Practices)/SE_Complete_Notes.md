@@ -571,20 +571,32 @@ timeline
 ## 3.5 Business and technical drivers
 
 ```mermaid
-mindmap
-  root((Drivers for<br/>Agility))
-    Business
-      Speed to market
-      Changing customer needs
-      Global competition
-      Customer satisfaction
-      ROI pressure
-    Technical
-      Increasing complexity
-      Continuous integration
-      Shorter technology lifecycles
-      High failure rates of big projects
-      Automation and DevOps
+flowchart LR
+    root(["Drivers for Agility"])
+    b1["Business"]
+    root --> b1
+    b1_1["Speed to market"]
+    b1 --> b1_1
+    b1_2["Changing customer needs"]
+    b1 --> b1_2
+    b1_3["Global competition"]
+    b1 --> b1_3
+    b1_4["Customer satisfaction"]
+    b1 --> b1_4
+    b1_5["ROI pressure"]
+    b1 --> b1_5
+    b2["Technical"]
+    root --> b2
+    b2_1["Increasing complexity"]
+    b2 --> b2_1
+    b2_2["Continuous integration"]
+    b2 --> b2_2
+    b2_3["Shorter technology lifecycles"]
+    b2 --> b2_3
+    b2_4["High failure rates of big projects"]
+    b2 --> b2_4
+    b2_5["Automation and DevOps"]
+    b2 --> b2_5
 ```
 
 | Category | Driver | Explanation |
@@ -893,20 +905,32 @@ flowchart LR
 ## 6.3 Three roles
 
 ```mermaid
-mindmap
-  root((Scrum<br/>Roles))
-    Product Owner
-      WHAT to build
-      Product vision
-      Backlog ordering
-    Scrum Master
-      PROCESS
-      Coach & facilitator
-      Impediment remover
-    Developers
-      HOW to build
-      Cross-functional
-      Self-organising
+flowchart LR
+    root(["Scrum Roles"])
+    b1["Product Owner"]
+    root --> b1
+    b1_1["WHAT to build"]
+    b1 --> b1_1
+    b1_2["Product vision"]
+    b1 --> b1_2
+    b1_3["Backlog ordering"]
+    b1 --> b1_3
+    b2["Scrum Master"]
+    root --> b2
+    b2_1["PROCESS"]
+    b2 --> b2_1
+    b2_2["Coach & facilitator"]
+    b2 --> b2_2
+    b2_3["Impediment remover"]
+    b2 --> b2_3
+    b3["Developers"]
+    root --> b3
+    b3_1["HOW to build"]
+    b3 --> b3_1
+    b3_2["Cross-functional"]
+    b3 --> b3_2
+    b3_3["Self-organising"]
+    b3 --> b3_3
 ```
 
 | Role | Owns | Key question | Must not do |
@@ -924,20 +948,32 @@ mindmap
 ## 6.4 Three artefacts
 
 ```mermaid
-mindmap
-  root((Scrum<br/>Artifacts))
-    Product Backlog
-      Ordered list
-      Single source of work
-      Product Goal
-    Sprint Backlog
-      Subset for the Sprint
-      Sprint Goal
-      Owned by Developers
-    Increment
-      Usable outcome
-      Meets Definition of Done
-      Cumulative
+flowchart LR
+    root(["Scrum Artifacts"])
+    b1["Product Backlog"]
+    root --> b1
+    b1_1["Ordered list"]
+    b1 --> b1_1
+    b1_2["Single source of work"]
+    b1 --> b1_2
+    b1_3["Product Goal"]
+    b1 --> b1_3
+    b2["Sprint Backlog"]
+    root --> b2
+    b2_1["Subset for the Sprint"]
+    b2 --> b2_1
+    b2_2["Sprint Goal"]
+    b2 --> b2_2
+    b2_3["Owned by Developers"]
+    b2 --> b2_3
+    b3["Increment"]
+    root --> b3
+    b3_1["Usable outcome"]
+    b3 --> b3_1
+    b3_2["Meets Definition of Done"]
+    b3 --> b3_2
+    b3_3["Cumulative"]
+    b3 --> b3_3
 ```
 
 | Artefact | Definition | Owner | Commitment |
@@ -1034,25 +1070,42 @@ flowchart TD
 ## 7.2 Six core practices
 
 ```mermaid
-mindmap
-  root((Kanban<br/>Core Practices))
-    Visualize Work
-      Boards, cards, columns
-    Limit WIP
-      Prevent overload
-      Expose bottlenecks
-    Manage Flow
-      Cycle time
-      Throughput
-    Make Policies Explicit
-      Written rules
-      Team ownership
-    Implement Feedback Loops
-      Daily meeting
-      Replenishment
-    Improve Continuously
-      Kaizen
-      Data-driven
+flowchart LR
+    root(["Kanban Core Practices"])
+    b1["Visualize Work"]
+    root --> b1
+    b1_1["Boards, cards, columns"]
+    b1 --> b1_1
+    b2["Limit WIP"]
+    root --> b2
+    b2_1["Prevent overload"]
+    b2 --> b2_1
+    b2_2["Expose bottlenecks"]
+    b2 --> b2_2
+    b3["Manage Flow"]
+    root --> b3
+    b3_1["Cycle time"]
+    b3 --> b3_1
+    b3_2["Throughput"]
+    b3 --> b3_2
+    b4["Make Policies Explicit"]
+    root --> b4
+    b4_1["Written rules"]
+    b4 --> b4_1
+    b4_2["Team ownership"]
+    b4 --> b4_2
+    b5["Implement Feedback Loops"]
+    root --> b5
+    b5_1["Daily meeting"]
+    b5 --> b5_1
+    b5_2["Replenishment"]
+    b5 --> b5_2
+    b6["Improve Continuously"]
+    root --> b6
+    b6_1["Kaizen"]
+    b6 --> b6_1
+    b6_2["Data-driven"]
+    b6 --> b6_2
 ```
 
 | # | Practice | Meaning |
@@ -1216,27 +1269,46 @@ XP is especially useful when requirements change constantly and constant change 
 ## 8.2 Technical practices
 
 ```mermaid
-mindmap
-  root((XP Technical<br/>Practices))
-    TDD
-      Red
-      Green
-      Refactor
-    Pair Programming
-      Driver
-      Navigator
-    Continuous Integration
-      Merge often
-      Automated tests
-    Refactoring
-      5-minute rule
-    Simple Design
-      Passes tests
-      Reveals intent
-      DRY
-      Fewest elements
-    Collective Ownership
-      Anyone can change any code
+flowchart LR
+    root(["XP Technical Practices"])
+    b1["TDD"]
+    root --> b1
+    b1_1["Red"]
+    b1 --> b1_1
+    b1_2["Green"]
+    b1 --> b1_2
+    b1_3["Refactor"]
+    b1 --> b1_3
+    b2["Pair Programming"]
+    root --> b2
+    b2_1["Driver"]
+    b2 --> b2_1
+    b2_2["Navigator"]
+    b2 --> b2_2
+    b3["Continuous Integration"]
+    root --> b3
+    b3_1["Merge often"]
+    b3 --> b3_1
+    b3_2["Automated tests"]
+    b3 --> b3_2
+    b4["Refactoring"]
+    root --> b4
+    b4_1["5-minute rule"]
+    b4 --> b4_1
+    b5["Simple Design"]
+    root --> b5
+    b5_1["Passes tests"]
+    b5 --> b5_1
+    b5_2["Reveals intent"]
+    b5 --> b5_2
+    b5_3["DRY"]
+    b5 --> b5_3
+    b5_4["Fewest elements"]
+    b5 --> b5_4
+    b6["Collective Ownership"]
+    root --> b6
+    b6_1["Anyone can change any code"]
+    b6 --> b6_1
 ```
 
 ### Pair programming
@@ -1501,17 +1573,26 @@ flowchart TD
 | **Muda** | Waste | Non-value-adding work | Eliminate |
 
 ```mermaid
-mindmap
-  root((Create Flow<br/>3M))
-    Muri
-      Overburden
-      Bottlenecks
-    Mura
-      Inconsistency
-      Defects
-    Muda
-      Waste
-      Non-value tasks
+flowchart LR
+    root(["Create Flow 3M"])
+    b1["Muri"]
+    root --> b1
+    b1_1["Overburden"]
+    b1 --> b1_1
+    b1_2["Bottlenecks"]
+    b1 --> b1_2
+    b2["Mura"]
+    root --> b2
+    b2_1["Inconsistency"]
+    b2 --> b2_1
+    b2_2["Defects"]
+    b2 --> b2_2
+    b3["Muda"]
+    root --> b3
+    b3_1["Waste"]
+    b3 --> b3_1
+    b3_2["Non-value tasks"]
+    b3 --> b3_2
 ```
 
 ## 9.4 The 8 wastes (software)
@@ -1644,17 +1725,26 @@ Lead time = 4.7 days  (down from 10 days, ~53% improvement)
 Agile began with **small co-located teams (5–9 people)**. Modern products need dozens/hundreds of developers across teams, time zones, and domains. The challenge: **keep collaboration, transparency, and continuous improvement with 20+ teams on one product.**
 
 ```mermaid
-mindmap
-  root((Scaling<br/>Agile))
-    LeSS
-      LeSS 2-8 teams
-      LeSS Huge 8+ teams
-      Requirement Areas
-    SAFe
-      ART
-      PI Planning
-      New roles
-      4 configurations
+flowchart LR
+    root(["Scaling Agile"])
+    b1["LeSS"]
+    root --> b1
+    b1_1["LeSS 2-8 teams"]
+    b1 --> b1_1
+    b1_2["LeSS Huge 8+ teams"]
+    b1 --> b1_2
+    b1_3["Requirement Areas"]
+    b1 --> b1_3
+    b2["SAFe"]
+    root --> b2
+    b2_1["ART"]
+    b2 --> b2_1
+    b2_2["PI Planning"]
+    b2 --> b2_2
+    b2_3["New roles"]
+    b2 --> b2_3
+    b2_4["4 configurations"]
+    b2 --> b2_4
 ```
 
 ## 10.2 LeSS — Large-Scale Scrum
@@ -1869,20 +1959,32 @@ flowchart LR
 | **Best for** | Feature-rich products with evolving scope | Maintenance, support, unpredictable flow | R&D, startups, high-quality/volatile work |
 
 ```mermaid
-mindmap
-  root((Agile<br/>Frameworks))
-    Scrum
-      Iterative
-      Timeboxed
-      Role-based
-    Kanban
-      Flow-based
-      Visual
-      WIP-limited
-    XP
-      Engineering-focused
-      Quality-driven
-      Customer-centric
+flowchart LR
+    root(["Agile Frameworks"])
+    b1["Scrum"]
+    root --> b1
+    b1_1["Iterative"]
+    b1 --> b1_1
+    b1_2["Timeboxed"]
+    b1 --> b1_2
+    b1_3["Role-based"]
+    b1 --> b1_3
+    b2["Kanban"]
+    root --> b2
+    b2_1["Flow-based"]
+    b2 --> b2_1
+    b2_2["Visual"]
+    b2 --> b2_2
+    b2_3["WIP-limited"]
+    b2 --> b2_3
+    b3["XP"]
+    root --> b3
+    b3_1["Engineering-focused"]
+    b3 --> b3_1
+    b3_2["Quality-driven"]
+    b3 --> b3_2
+    b3_3["Customer-centric"]
+    b3 --> b3_3
 ```
 
 ## 11.2 When to choose each
@@ -1952,30 +2054,52 @@ Frameworks are not mutually exclusive:
 It answers four stakeholder questions: *How much will it cost? How long will it take? How many developers? When can we deliver?*
 
 ```mermaid
-mindmap
-  root((Software<br/>Estimation))
-    Size
-      Story Points
-      Function Points
-      Features
-      Use Cases
-    Effort
-      Person-hours
-      Person-days
-      Person-weeks
-    Duration
-      Days
-      Weeks
-      Months
-    Resources
-      People
-      Hardware
-      Tools
-      Environments
-    Cost
-      Effort x Rate
-      Cloud Services
-      Licenses
+flowchart LR
+    root(["Software Estimation"])
+    b1["Size"]
+    root --> b1
+    b1_1["Story Points"]
+    b1 --> b1_1
+    b1_2["Function Points"]
+    b1 --> b1_2
+    b1_3["Features"]
+    b1 --> b1_3
+    b1_4["Use Cases"]
+    b1 --> b1_4
+    b2["Effort"]
+    root --> b2
+    b2_1["Person-hours"]
+    b2 --> b2_1
+    b2_2["Person-days"]
+    b2 --> b2_2
+    b2_3["Person-weeks"]
+    b2 --> b2_3
+    b3["Duration"]
+    root --> b3
+    b3_1["Days"]
+    b3 --> b3_1
+    b3_2["Weeks"]
+    b3 --> b3_2
+    b3_3["Months"]
+    b3 --> b3_3
+    b4["Resources"]
+    root --> b4
+    b4_1["People"]
+    b4 --> b4_1
+    b4_2["Hardware"]
+    b4 --> b4_2
+    b4_3["Tools"]
+    b4 --> b4_3
+    b4_4["Environments"]
+    b4 --> b4_4
+    b5["Cost"]
+    root --> b5
+    b5_1["Effort x Rate"]
+    b5 --> b5_1
+    b5_2["Cloud Services"]
+    b5 --> b5_2
+    b5_3["Licenses"]
+    b5 --> b5_3
 ```
 
 | Dimension | Question | Unit / method |
@@ -2066,22 +2190,36 @@ The key question is comparative: *"Compared to Login, how much bigger is Payment
 ### Three factors
 
 ```mermaid
-mindmap
-  root((Story Points<br/>Factors))
-    Risk
-      New technology
-      Unclear requirements
-      External dependencies
-      Team experience
-    Complexity
-      Technical difficulty
-      Business logic
-      Number of conditions
-    Volume
-      Screens
-      Modules
-      Amount of coding
-      Activities
+flowchart LR
+    root(["Story Points Factors"])
+    b1["Risk"]
+    root --> b1
+    b1_1["New technology"]
+    b1 --> b1_1
+    b1_2["Unclear requirements"]
+    b1 --> b1_2
+    b1_3["External dependencies"]
+    b1 --> b1_3
+    b1_4["Team experience"]
+    b1 --> b1_4
+    b2["Complexity"]
+    root --> b2
+    b2_1["Technical difficulty"]
+    b2 --> b2_1
+    b2_2["Business logic"]
+    b2 --> b2_2
+    b2_3["Number of conditions"]
+    b2 --> b2_3
+    b3["Volume"]
+    root --> b3
+    b3_1["Screens"]
+    b3 --> b3_1
+    b3_2["Modules"]
+    b3 --> b3_2
+    b3_3["Amount of coding"]
+    b3 --> b3_3
+    b3_4["Activities"]
+    b3 --> b3_4
 ```
 
 | Factor | Question | Includes |
@@ -2308,20 +2446,32 @@ flowchart TD
 ## 13.4 Inputs
 
 ```mermaid
-mindmap
-  root((Inputs to<br/>Release Planning))
-    Product Vision
-      High-level goal
-      Guides direction
-      PO / stakeholders
-    Product Roadmap
-      Timeline of features
-      Sequence and timing
-      Quarterly / MVP / major releases
-    Prioritized Product Backlog
-      Stories by value
-      Top items refined
-      Ready for release
+flowchart LR
+    root(["Inputs to Release Planning"])
+    b1["Product Vision"]
+    root --> b1
+    b1_1["High-level goal"]
+    b1 --> b1_1
+    b1_2["Guides direction"]
+    b1 --> b1_2
+    b1_3["PO / stakeholders"]
+    b1 --> b1_3
+    b2["Product Roadmap"]
+    root --> b2
+    b2_1["Timeline of features"]
+    b2 --> b2_1
+    b2_2["Sequence and timing"]
+    b2 --> b2_2
+    b2_3["Quarterly / MVP / major releases"]
+    b2 --> b2_3
+    b3["Prioritized Product Backlog"]
+    root --> b3
+    b3_1["Stories by value"]
+    b3 --> b3_1
+    b3_2["Top items refined"]
+    b3 --> b3_2
+    b3_3["Ready for release"]
+    b3 --> b3_3
 ```
 
 | Input | Meaning |
@@ -2335,22 +2485,36 @@ mindmap
 ## 13.5 MoSCoW and the MVP
 
 ```mermaid
-mindmap
-  root((MoSCoW<br/>Prioritization))
-    Must Have
-      Highest business value
-      Defines USP
-      Non-negotiable
-    Should Have
-      Important
-      Significant value
-      Painful workaround
-    Could Have
-      Nice to have
-      Can be left out
-    Won't Have
-      Not a priority
-      Explicitly excluded
+flowchart LR
+    root(["MoSCoW Prioritization"])
+    b1["Must Have"]
+    root --> b1
+    b1_1["Highest business value"]
+    b1 --> b1_1
+    b1_2["Defines USP"]
+    b1 --> b1_2
+    b1_3["Non-negotiable"]
+    b1 --> b1_3
+    b2["Should Have"]
+    root --> b2
+    b2_1["Important"]
+    b2 --> b2_1
+    b2_2["Significant value"]
+    b2 --> b2_2
+    b2_3["Painful workaround"]
+    b2 --> b2_3
+    b3["Could Have"]
+    root --> b3
+    b3_1["Nice to have"]
+    b3 --> b3_1
+    b3_2["Can be left out"]
+    b3 --> b3_2
+    b4["Won't Have"]
+    root --> b4
+    b4_1["Not a priority"]
+    b4 --> b4_1
+    b4_2["Explicitly excluded"]
+    b4 --> b4_2
 ```
 
 | Category | Description | Example |
@@ -2731,34 +2895,60 @@ Closes #123.
 ## 14.7 What belongs under version control
 
 ```mermaid
-mindmap
-  root((Artifacts Under<br/>Version Control))
-    Code
-      Source files
-      Libraries
-    Config
-      Environment configs
-      App settings
-    Tests
-      Scripts
-      Test data
-    Documentation
-      README
-      API docs
-      User guides
-    UI/UX Assets
-      Images
-      Fonts
-      Design files
-    Database
-      Schemas
-      Migrations
-    Build & Deploy
-      CI/CD configs
-      Dockerfiles
-    Analytics
-      Templates
-      Dashboards
+flowchart LR
+    root(["Artifacts Under Version Control"])
+    b1["Code"]
+    root --> b1
+    b1_1["Source files"]
+    b1 --> b1_1
+    b1_2["Libraries"]
+    b1 --> b1_2
+    b2["Config"]
+    root --> b2
+    b2_1["Environment configs"]
+    b2 --> b2_1
+    b2_2["App settings"]
+    b2 --> b2_2
+    b3["Tests"]
+    root --> b3
+    b3_1["Scripts"]
+    b3 --> b3_1
+    b3_2["Test data"]
+    b3 --> b3_2
+    b4["Documentation"]
+    root --> b4
+    b4_1["README"]
+    b4 --> b4_1
+    b4_2["API docs"]
+    b4 --> b4_2
+    b4_3["User guides"]
+    b4 --> b4_3
+    b5["UI/UX Assets"]
+    root --> b5
+    b5_1["Images"]
+    b5 --> b5_1
+    b5_2["Fonts"]
+    b5 --> b5_2
+    b5_3["Design files"]
+    b5 --> b5_3
+    b6["Database"]
+    root --> b6
+    b6_1["Schemas"]
+    b6 --> b6_1
+    b6_2["Migrations"]
+    b6 --> b6_2
+    b7["Build & Deploy"]
+    root --> b7
+    b7_1["CI/CD configs"]
+    b7 --> b7_1
+    b7_2["Dockerfiles"]
+    b7 --> b7_2
+    b8["Analytics"]
+    root --> b8
+    b8_1["Templates"]
+    b8 --> b8_1
+    b8_2["Dashboards"]
+    b8 --> b8_2
 ```
 
 > Rule of thumb: version **everything needed to build, test, deploy, and document** the project.
@@ -3031,34 +3221,60 @@ flowchart TD
 ## 15.9 Common CI/CD tools
 
 ```mermaid
-mindmap
-  root((CI/CD Tools))
-    Version Control
-      Git
-      GitHub
-      GitLab
-    Build
-      Jenkins
-      Maven
-      Gradle
-      npm
-    Test
-      JUnit
-      TestNG
-      Selenium
-      SonarQube
-    Package
-      Docker
-      JFrog Artifactory
-      Nexus
-    Deploy
-      Kubernetes
-      Ansible
-      ArgoCD
-    Monitoring
-      Prometheus
-      Grafana
-      ELK Stack
+flowchart LR
+    root(["CI/CD Tools"])
+    b1["Version Control"]
+    root --> b1
+    b1_1["Git"]
+    b1 --> b1_1
+    b1_2["GitHub"]
+    b1 --> b1_2
+    b1_3["GitLab"]
+    b1 --> b1_3
+    b2["Build"]
+    root --> b2
+    b2_1["Jenkins"]
+    b2 --> b2_1
+    b2_2["Maven"]
+    b2 --> b2_2
+    b2_3["Gradle"]
+    b2 --> b2_3
+    b2_4["npm"]
+    b2 --> b2_4
+    b3["Test"]
+    root --> b3
+    b3_1["JUnit"]
+    b3 --> b3_1
+    b3_2["TestNG"]
+    b3 --> b3_2
+    b3_3["Selenium"]
+    b3 --> b3_3
+    b3_4["SonarQube"]
+    b3 --> b3_4
+    b4["Package"]
+    root --> b4
+    b4_1["Docker"]
+    b4 --> b4_1
+    b4_2["JFrog Artifactory"]
+    b4 --> b4_2
+    b4_3["Nexus"]
+    b4 --> b4_3
+    b5["Deploy"]
+    root --> b5
+    b5_1["Kubernetes"]
+    b5 --> b5_1
+    b5_2["Ansible"]
+    b5 --> b5_2
+    b5_3["ArgoCD"]
+    b5 --> b5_3
+    b6["Monitoring"]
+    root --> b6
+    b6_1["Prometheus"]
+    b6 --> b6_1
+    b6_2["Grafana"]
+    b6 --> b6_2
+    b6_3["ELK Stack"]
+    b6 --> b6_3
 ```
 
 | Stage | Tools | Example |
