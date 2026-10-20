@@ -3,6 +3,8 @@
 > **Compiled from 21 topic files.** Theory is deliberately compressed: one-line definitions, tables, and diagrams. Overlapping notes (`01`, `02`, and `03`) are merged; repeated comparison tables are consolidated.
 >
 > **How to use:** read the *In one line* box → study the diagram → memorise the table → check the *Exam hits* bullets. Revise only the tables, diagrams, and Part V appendix before the exam.
+>
+> **Diagram key:** `├─→` / `└─→` child branch · `↺` loop or feedback · `┄→` cross-link · `↓` next step. All diagrams are plain text, so they render everywhere without Mermaid limits.
 
 ---
 
@@ -51,10 +53,8 @@
 
 A **system** is a set of **interrelated components working together toward a common goal**.
 
-```mermaid
-flowchart LR
-    A[INPUTS] --> B[Components /<br/>Processes]
-    B --> C[OUTPUTS]
+```text
+INPUTS → Components / Processes → OUTPUTS
 ```
 
 | Characteristic | Meaning |
@@ -144,14 +144,10 @@ The **software crisis** (late 1960s) — projects over budget, late, unreliable 
 - **Disciplined** — follows rules and standards.
 - **Quantifiable** — measurable, metric-driven.
 
-```mermaid
-flowchart TD
-    A[Requirements Engineering] --> B[Architectural Design]
-    B --> C[Implementation / Coding]
-    C --> D[Verification / Testing]
-    D --> E[Deployment / DevOps]
-    E --> F[Evolution / Maintenance]
-    F --> A
+```text
+Requirements Engineering → Architectural Design → Implementation / Coding → Verification / Testing
+  → Deployment / DevOps → Evolution / Maintenance
+    ↺ back to Requirements Engineering
 ```
 
 | Core component | What it does |
@@ -174,14 +170,10 @@ flowchart TD
 > A **risk** is a potential problem that might affect project success.  
 > **Risk exposure (RE) = Probability (P) × Impact/Loss (L).**
 
-```mermaid
-flowchart TD
-    A[1. Risk Identification] --> B[2. Risk Analysis]
-    B --> C[3. Risk Prioritization]
-    C --> D[4. Risk Mitigation /<br/>Contingency Planning]
-    D --> E[5. Risk Monitoring]
-    E --> F[6. Risk Control / Response]
-    F --> A
+```text
+1. Risk Identification → 2. Risk Analysis → 3. Risk Prioritization
+  → 4. Risk Mitigation / Contingency Planning → 5. Risk Monitoring → 6. Risk Control / Response
+    ↺ back to 1. Risk Identification
 ```
 
 | Step | What happens |
@@ -245,15 +237,15 @@ flowchart TD
 
 ## 2.1 Evolution of software development
 
-```mermaid
-timeline
-    title Evolution of Software Development
-    1940s-1950s : Machine code & punched cards
-    1950s-1960s : High-level languages & mainframes
-    1970s-1980s : Personal computer revolution
-    1983 onward : Internet, TCP/IP, DNS
-    2007-2008 onward : Mobile apps & app stores
-    2010 onward : Cloud, AI, DevOps
+```text
+Evolution of Software Development
+
+1940s–1950s  ─── Machine code & punched cards
+1950s–1960s  ─── High-level languages & mainframes
+1970s–1980s  ─── Personal computer revolution
+1983 onward  ─── Internet, TCP/IP, DNS
+2007–2008    ─── Mobile apps & app stores
+2010 onward  ─── Cloud, AI, DevOps
 ```
 
 | Stage | Era | Key highlights |
@@ -273,28 +265,24 @@ timeline
 
 **Why use one:** structure and predictability; planning and risk management; clear roles; quality assurance; communication; visibility and traceability.
 
-```mermaid
-flowchart TD
-    A[Software Process Models] --> B[Linear / Prescriptive]
-    A --> C[Iterative / Evolutionary]
-    B --> B1[Waterfall]
-    B --> B2[V-Model]
-    C --> C1[Incremental]
-    C --> C2[Spiral]
-    C --> C3[Prototyping]
+```text
+Software Process Models
+├─→ Linear / Prescriptive
+│  ├─→ Waterfall
+│  └─→ V-Model
+└─→ Iterative / Evolutionary
+   ├─→ Incremental
+   ├─→ Spiral
+   └─→ Prototyping
 ```
 
 ## 2.3 Waterfall
 
 **Linear-sequential**: each phase is completed, verified, and signed off before the next begins. Popularised by Winston Royce (1970) — ironically, Royce warned that the pure sequence was risky.
 
-```mermaid
-flowchart TD
-    A[Requirements] --> B[Design]
-    B --> C[Implementation / Development]
-    C --> D[Integration and Testing]
-    D --> E[Deployment]
-    E --> F[Maintenance]
+```text
+Requirements → Design → Implementation / Development → Integration and Testing → Deployment
+  → Maintenance
 ```
 
 | Phase | Output |
@@ -319,20 +307,15 @@ The V-Model is **Waterfall bent into a V**: every development phase on the left 
 - **Verification** — “Are we building the product right?” (reviews, static analysis, design checks).
 - **Validation** — “Are we building the right product?” (unit → integration → system → acceptance testing).
 
-```mermaid
-flowchart TD
-    A[Requirements Analysis] --> B[System Design]
-    B --> C[Architecture / High-Level Design]
-    C --> D[Module / Low-Level Design]
-    D --> E[Coding]
-    E --> F[Unit Test]
-    F --> G[Integration Test]
-    G --> H[System Test]
-    H --> I[Acceptance Test]
-    A -.->|Maps to| I
-    B -.->|Maps to| H
-    C -.->|Maps to| G
-    D -.->|Maps to| F
+```text
+Requirements Analysis → System Design → Architecture / High-Level Design → Module / Low-Level Design
+  → Coding → Unit Test → Integration Test → System Test → Acceptance Test
+
+Cross-links:
+  Requirements Analysis ┄[Maps to]→ Acceptance Test
+  System Design ┄[Maps to]→ System Test
+  Architecture / High-Level Design ┄[Maps to]→ Integration Test
+  Module / Low-Level Design ┄[Maps to]→ Unit Test
 ```
 
 | Development stage | Test planned in parallel | What is validated |
@@ -355,15 +338,16 @@ flowchart TD
 
 The system is divided into **increments/builds**; each increment adds a fully tested slice of functionality.
 
-```mermaid
-flowchart LR
-    A[Global Requirements] --> B[Increment 1<br/>Core]
-    A --> C[Increment 2<br/>Secondary]
-    A --> D[Increment n<br/>Advanced]
-    B --> B1[Design → Code → Test → Release]
-    C --> C1[Design → Code → Test → Release]
-    D --> D1[Design → Code → Test → Release]
-    B1 -.->|Feedback| C1
+```text
+Global Requirements
+├─→ Increment 1 (Core)
+│  └─→ Design → Code → Test → Release
+├─→ Increment 2 (Secondary)
+│  └─→ Design → Code → Test → Release
+└─→ Increment n (Advanced)
+   └─→ Design → Code → Test → Release
+
+Feedback: Increment 1 release → Increment 2 design
 ```
 
 | Step | Action |
@@ -385,17 +369,17 @@ flowchart LR
 
 Build a **quick, simplified working version** to clarify requirements, then engineer the final system.
 
-```mermaid
-flowchart TD
-    A[Initial Requirements] --> B[Quick Design]
-    B --> C[Build Prototype]
-    C --> D[Customer Evaluation]
-    D --> E{Satisfied?}
-    E -->|No| F[Refine / Update]
-    F --> B
-    E -->|Yes| G[Full Development]
-    G --> H[Test]
-    H --> I[Deploy & Maintain]
+```text
+Initial Requirements
+└─→ Quick Design
+   └─→ Build Prototype
+      └─→ Customer Evaluation
+         └─→ Satisfied?
+            ├─[No]→ Refine / Update
+            │  └─↺ back to Quick Design
+            └─[Yes]→ Full Development
+               └─→ Test
+                  └─→ Deploy & Maintain
 ```
 
 | Prototype type | Purpose |
@@ -414,12 +398,10 @@ flowchart TD
 
 **Risk-driven iterative model**: each loop is one iteration with four quadrants.
 
-```mermaid
-flowchart TD
-    A[1. Determine Objectives,<br/>Alternatives & Constraints] --> B[2. Identify & Resolve Risks]
-    B --> C[3. Develop & Verify<br/>Next-Level Product]
-    C --> D[4. Plan Next Iteration /<br/>Review with Stakeholders]
-    D --> A
+```text
+1. Determine Objectives, Alternatives & Constraints → 2. Identify & Resolve Risks
+  → 3. Develop & Verify Next-Level Product → 4. Plan Next Iteration / Review with Stakeholders
+    ↺ back to 1. Determine Objectives, Alternatives & Constraints
 ```
 
 | Quadrant | Key question |
@@ -457,19 +439,19 @@ flowchart TD
 | **Is early delivery required?** | Incremental / Agile | Waterfall |
 | **Are users clear about what they want?** | Waterfall / V-Model | Prototyping / Agile |
 
-```mermaid
-flowchart TD
-    A[Start] --> B{Requirements<br/>stable?}
-    B -->|Yes| C{Technology<br/>familiar?}
-    B -->|No| D{Users clear about<br/>what they want?}
-    C -->|Yes| E{System<br/>critical?}
-    C -->|No| F[Spiral / Prototyping]
-    E -->|Yes| G[V-Model / Waterfall]
-    E -->|No| H{Early delivery<br/>needed?}
-    H -->|Yes| I[Incremental / Agile]
-    H -->|No| J[Waterfall]
-    D -->|Yes| K[Agile / Iterative]
-    D -->|No| L[Prototyping / Agile]
+```text
+Start
+└─→ Requirements stable?
+   ├─[Yes]→ Technology familiar?
+   │  ├─[Yes]→ System critical?
+   │  │  ├─[Yes]→ V-Model / Waterfall
+   │  │  └─[No]→ Early delivery needed?
+   │  │     ├─[Yes]→ Incremental / Agile
+   │  │     └─[No]→ Waterfall
+   │  └─[No]→ Spiral / Prototyping
+   └─[No]→ Users clear about what they want?
+      ├─[Yes]→ Agile / Iterative
+      └─[No]→ Prototyping / Agile
 ```
 
 **Master comparison**
@@ -537,14 +519,14 @@ They adapted poorly to:
 
 ## 3.3 Industry shifts (1990s–2000s)
 
-```mermaid
-timeline
-    title Shifts that created Agile
-    1990s : Demand for faster delivery
-    1990s : Rise of startups and web apps
-    1990s : Mobile/web platforms
-    2000s : Collaborative cross-functional teams
-    2001 : Agile Manifesto
+```text
+Shifts that created Agile
+
+1990s  ─┬─ Demand for faster delivery
+        ├─ Rise of startups and web apps
+        └─ Mobile/web platforms
+2000s  ─── Collaborative cross-functional teams
+2001   ─── Agile Manifesto
 ```
 
 | Before | After |
@@ -570,33 +552,20 @@ timeline
 
 ## 3.5 Business and technical drivers
 
-```mermaid
-flowchart LR
-    root(["Drivers for Agility"])
-    b1["Business"]
-    root --> b1
-    b1_1["Speed to market"]
-    b1 --> b1_1
-    b1_2["Changing customer needs"]
-    b1 --> b1_2
-    b1_3["Global competition"]
-    b1 --> b1_3
-    b1_4["Customer satisfaction"]
-    b1 --> b1_4
-    b1_5["ROI pressure"]
-    b1 --> b1_5
-    b2["Technical"]
-    root --> b2
-    b2_1["Increasing complexity"]
-    b2 --> b2_1
-    b2_2["Continuous integration"]
-    b2 --> b2_2
-    b2_3["Shorter technology lifecycles"]
-    b2 --> b2_3
-    b2_4["High failure rates of big projects"]
-    b2 --> b2_4
-    b2_5["Automation and DevOps"]
-    b2 --> b2_5
+```text
+Drivers for Agility
+├─→ Business
+│  ├─→ Speed to market
+│  ├─→ Changing customer needs
+│  ├─→ Global competition
+│  ├─→ Customer satisfaction
+│  └─→ ROI pressure
+└─→ Technical
+   ├─→ Increasing complexity
+   ├─→ Continuous integration
+   ├─→ Shorter technology lifecycles
+   ├─→ High failure rates of big projects
+   └─→ Automation and DevOps
 ```
 
 | Category | Driver | Explanation |
@@ -650,27 +619,27 @@ flowchart LR
 | **Outcome** | **Manifesto for Agile Software Development** signed |
 | **Organisation** | Attendees became the **Agile Alliance**, now a global non-profit with **72,000+ members** |
 
-```mermaid
-timeline
-    title History of the Agile Manifesto
-    Feb 2001 : 17 representatives meet at Snowbird, Utah
-    Feb 2001 : Agile Manifesto signed
-    2001+ : Agile Alliance formed
-    Present : 72,000+ members, conferences, initiatives
+```text
+History of the Agile Manifesto
+
+Feb 2001  ─┬─ 17 representatives meet at Snowbird, Utah
+           └─ Agile Manifesto signed
+2001+     ─── Agile Alliance formed
+Present   ─── 72,000+ members, conferences, initiatives
 ```
 
 ## 4.2 The four values
 
-```mermaid
-flowchart TD
-    A[Agile Manifesto<br/>4 Values] --> B[1. Individuals and<br/>interactions]
-    A --> C[2. Working<br/>software]
-    A --> D[3. Customer<br/>collaboration]
-    A --> E[4. Responding<br/>to change]
-    B --> B1[over processes and tools]
-    C --> C1[over comprehensive documentation]
-    D --> D1[over contract negotiation]
-    E --> E1[over following a plan]
+```text
+Agile Manifesto 4 Values
+├─→ 1. Individuals and interactions
+│  └─→ over processes and tools
+├─→ 2. Working software
+│  └─→ over comprehensive documentation
+├─→ 3. Customer collaboration
+│  └─→ over contract negotiation
+└─→ 4. Responding to change
+   └─→ over following a plan
 ```
 
 | Value | Interpretation | Not a rejection of… |
@@ -710,12 +679,12 @@ flowchart TD
 
 **Memory categories**
 
-```mermaid
-flowchart TD
-    A[12 Agile<br/>Principles] --> B[Delivery: 1, 3, 7]
-    A --> C[Change: 2, 4, 12]
-    A --> D[People: 5, 6, 8, 11]
-    A --> E[Technical: 9, 10]
+```text
+12 Agile Principles
+├─→ Delivery: 1, 3, 7
+├─→ Change: 2, 4, 12
+├─→ People: 5, 6, 8, 11
+└─→ Technical: 9, 10
 ```
 
 **Values vs principles:** **values = what we believe; principles = how we act on those beliefs.**
@@ -758,11 +727,9 @@ Satisfied customers · improved quality · adaptability · predictability throug
 | **Incremental** | Deliver the software in small functional parts | **Expansion** | V1 login → V2 search → V3 cart |
 | **Evolutionary** | Software continuously changes as needs arise | **Learning/adaptation** | Food app adds live tracking and payments later |
 
-```mermaid
-flowchart LR
-    A[Iterative<br/>Refine] --> B[Incremental<br/>Expand]
-    B --> C[Evolutionary<br/>Adapt]
-    C --> A
+```text
+Iterative Refine → Incremental Expand → Evolutionary Adapt
+    ↺ back to Iterative Refine
 ```
 
 > **Exam trap:** *Iterative expands… no — iterative **refines**, incremental **expands**, evolutionary **adapts**.*
@@ -775,12 +742,9 @@ The most effective way to convey information: fast clarification, fewer misunder
 
 ## 5.3 Feedback loops
 
-```mermaid
-flowchart LR
-    A[Build] --> B[Deliver]
-    B --> C[Get Feedback]
-    C --> D[Improve]
-    D --> A
+```text
+Build → Deliver → Get Feedback → Improve
+    ↺ back to Build
 ```
 
 Feedback comes from **customers, end users, and team members**. Benefits: problems found earlier, easier change, higher satisfaction, a product that actually fits user needs.
@@ -789,20 +753,17 @@ Feedback comes from **customers, end users, and team members**. Benefits: proble
 
 Quality is **continuous, not a phase**. Every stage — requirements, design, code, test, deploy, monitor — carries quality checks.
 
-```mermaid
-flowchart LR
-    A[Requirements] --> B[Design]
-    B --> C[Code]
-    C --> D[Test]
-    D --> E[Deploy]
-    E --> F[Monitor]
-    F --> A
-    G[Quality] -.-> A
-    G -.-> B
-    G -.-> C
-    G -.-> D
-    G -.-> E
-    G -.-> F
+```text
+Requirements → Design → Code → Test → Deploy → Monitor
+    ↺ back to Requirements
+
+Cross-links:
+  Quality ┄→ Requirements
+  Quality ┄→ Design
+  Quality ┄→ Code
+  Quality ┄→ Test
+  Quality ┄→ Deploy
+  Quality ┄→ Monitor
 ```
 
 **Benefits:** better quality, fewer errors, less rework, higher customer confidence.
@@ -837,15 +798,13 @@ Agile says documentation should **support** development, not become the objectiv
 | Change is difficult | Change is accommodated |
 | Big-bang integration | Integration every cycle |
 
-```mermaid
-flowchart LR
-    subgraph Waterfall
-        A1[Requirements] --> A2[Design] --> A3[Implementation] --> A4[Testing] --> A5[Deployment]
-    end
-    subgraph Iterative
-        B1[Requirements] --> B2[Design] --> B3[Implementation] --> B4[Testing] --> B5[Deployment]
-        B5 --> B1
-    end
+```text
+[Waterfall]
+Requirements → Design → Implementation → Testing → Deployment
+
+[Iterative]
+Requirements → Design → Implementation → Testing → Deployment
+    ↺ back to Requirements
 ```
 
 ## 5.8 Advantages and challenges
@@ -904,33 +863,20 @@ flowchart LR
 
 ## 6.3 Three roles
 
-```mermaid
-flowchart LR
-    root(["Scrum Roles"])
-    b1["Product Owner"]
-    root --> b1
-    b1_1["WHAT to build"]
-    b1 --> b1_1
-    b1_2["Product vision"]
-    b1 --> b1_2
-    b1_3["Backlog ordering"]
-    b1 --> b1_3
-    b2["Scrum Master"]
-    root --> b2
-    b2_1["PROCESS"]
-    b2 --> b2_1
-    b2_2["Coach & facilitator"]
-    b2 --> b2_2
-    b2_3["Impediment remover"]
-    b2 --> b2_3
-    b3["Developers"]
-    root --> b3
-    b3_1["HOW to build"]
-    b3 --> b3_1
-    b3_2["Cross-functional"]
-    b3 --> b3_2
-    b3_3["Self-organising"]
-    b3 --> b3_3
+```text
+Scrum Roles
+├─→ Product Owner
+│  ├─→ WHAT to build
+│  ├─→ Product vision
+│  └─→ Backlog ordering
+├─→ Scrum Master
+│  ├─→ PROCESS
+│  ├─→ Coach & facilitator
+│  └─→ Impediment remover
+└─→ Developers
+   ├─→ HOW to build
+   ├─→ Cross-functional
+   └─→ Self-organising
 ```
 
 | Role | Owns | Key question | Must not do |
@@ -947,33 +893,20 @@ flowchart LR
 
 ## 6.4 Three artefacts
 
-```mermaid
-flowchart LR
-    root(["Scrum Artifacts"])
-    b1["Product Backlog"]
-    root --> b1
-    b1_1["Ordered list"]
-    b1 --> b1_1
-    b1_2["Single source of work"]
-    b1 --> b1_2
-    b1_3["Product Goal"]
-    b1 --> b1_3
-    b2["Sprint Backlog"]
-    root --> b2
-    b2_1["Subset for the Sprint"]
-    b2 --> b2_1
-    b2_2["Sprint Goal"]
-    b2 --> b2_2
-    b2_3["Owned by Developers"]
-    b2 --> b2_3
-    b3["Increment"]
-    root --> b3
-    b3_1["Usable outcome"]
-    b3 --> b3_1
-    b3_2["Meets Definition of Done"]
-    b3 --> b3_2
-    b3_3["Cumulative"]
-    b3 --> b3_3
+```text
+Scrum Artifacts
+├─→ Product Backlog
+│  ├─→ Ordered list
+│  ├─→ Single source of work
+│  └─→ Product Goal
+├─→ Sprint Backlog
+│  ├─→ Subset for the Sprint
+│  ├─→ Sprint Goal
+│  └─→ Owned by Developers
+└─→ Increment
+   ├─→ Usable outcome
+   ├─→ Meets Definition of Done
+   └─→ Cumulative
 ```
 
 | Artefact | Definition | Owner | Commitment |
@@ -989,15 +922,13 @@ flowchart LR
 
 ## 6.5 Sprint events
 
-```mermaid
-flowchart TD
-    A[Sprint] --> B[Sprint Planning]
-    B --> C[Daily Scrum]
-    C --> D[Sprint Review]
-    D --> E[Sprint Retrospective]
-    E --> A
-    F[Backlog Refinement] -.-> B
-    F -.-> A
+```text
+Sprint → Sprint Planning → Daily Scrum → Sprint Review → Sprint Retrospective
+    ↺ back to Sprint
+
+Cross-links:
+  Backlog Refinement ┄→ Sprint Planning
+  Backlog Refinement ┄→ Sprint
 ```
 
 | Event | Time-box (4-week Sprint) | Purpose | Who attends |
@@ -1017,19 +948,19 @@ flowchart TD
 
 ## 6.6 Scrum flow
 
-```mermaid
-flowchart TD
-    A[Product Vision] --> B[Product Backlog]
-    B --> C[Sprint Planning]
-    C --> D[Sprint Backlog]
-    D --> E[Implementation]
-    E --> F[Daily Scrum]
-    F --> E
-    E --> G[Increment]
-    G --> H[Sprint Review]
-    H --> I[Sprint Retrospective]
-    I --> J[Backlog Refinement]
-    J --> B
+```text
+Product Vision
+└─→ Product Backlog
+   └─→ Sprint Planning
+      └─→ Sprint Backlog
+         └─→ Implementation
+            ├─→ Daily Scrum
+            │  └─↺ back to Implementation
+            └─→ Increment
+               └─→ Sprint Review
+                  └─→ Sprint Retrospective
+                     └─→ Backlog Refinement
+                        └─↺ back to Product Backlog
 ```
 
 **Three pillars of empiricism:** **transparency, inspection, adaptation**.
@@ -1069,43 +1000,25 @@ flowchart TD
 
 ## 7.2 Six core practices
 
-```mermaid
-flowchart LR
-    root(["Kanban Core Practices"])
-    b1["Visualize Work"]
-    root --> b1
-    b1_1["Boards, cards, columns"]
-    b1 --> b1_1
-    b2["Limit WIP"]
-    root --> b2
-    b2_1["Prevent overload"]
-    b2 --> b2_1
-    b2_2["Expose bottlenecks"]
-    b2 --> b2_2
-    b3["Manage Flow"]
-    root --> b3
-    b3_1["Cycle time"]
-    b3 --> b3_1
-    b3_2["Throughput"]
-    b3 --> b3_2
-    b4["Make Policies Explicit"]
-    root --> b4
-    b4_1["Written rules"]
-    b4 --> b4_1
-    b4_2["Team ownership"]
-    b4 --> b4_2
-    b5["Implement Feedback Loops"]
-    root --> b5
-    b5_1["Daily meeting"]
-    b5 --> b5_1
-    b5_2["Replenishment"]
-    b5 --> b5_2
-    b6["Improve Continuously"]
-    root --> b6
-    b6_1["Kaizen"]
-    b6 --> b6_1
-    b6_2["Data-driven"]
-    b6 --> b6_2
+```text
+Kanban Core Practices
+├─→ Visualize Work
+│  └─→ Boards, cards, columns
+├─→ Limit WIP
+│  ├─→ Prevent overload
+│  └─→ Expose bottlenecks
+├─→ Manage Flow
+│  ├─→ Cycle time
+│  └─→ Throughput
+├─→ Make Policies Explicit
+│  ├─→ Written rules
+│  └─→ Team ownership
+├─→ Implement Feedback Loops
+│  ├─→ Daily meeting
+│  └─→ Replenishment
+└─→ Improve Continuously
+   ├─→ Kaizen
+   └─→ Data-driven
 ```
 
 | # | Practice | Meaning |
@@ -1126,12 +1039,8 @@ flowchart LR
 | **WIP limit** | Maximum cards allowed in a column | **HOW MANY** |
 | **Explicit policy** | Written rule for moving work | **HOW** |
 
-```mermaid
-flowchart LR
-    A[Backlog] --> B[To Do]
-    B --> C[In Progress<br/>WIP: 2]
-    C --> D[Review<br/>WIP: 1]
-    D --> E[Done]
+```text
+Backlog → To Do → In Progress [WIP: 2] → Review [WIP: 1] → Done
 ```
 
 Basic board columns: **To Do → Work In Progress → Complete**. Columns can be added/changed and represent states, so they expose flow and bottlenecks.
@@ -1142,13 +1051,9 @@ Basic board columns: **To Do → Work In Progress → Complete**. Columns can be
 
 **Benefits:** eliminates multitasking; exposes bottlenecks; forces collaboration (if a column is full, help clear it rather than start new work); shortens cycle time.
 
-```mermaid
-flowchart LR
-    A[Developer finishes<br/>email verification] --> B{Testing column full?}
-    B -->|Yes| C[Cannot start new work]
-    C --> D[Pair with tester<br/>to unblock pipeline]
-    D --> E[Testing completes]
-    E --> F[Work flows]
+```text
+Developer finishes email verification → Testing column full? ─[Yes]→ Cannot start new work
+  → Pair with tester to unblock pipeline → Testing completes → Work flows
 ```
 
 ## 7.5 Explicit policies
@@ -1186,14 +1091,14 @@ A **policy** is a clear, written agreement about how work is managed and moved. 
 
 ## 7.9 History
 
-```mermaid
-timeline
-    title History of Kanban
-    1940s : Toyota improves production
-    1940s : Taiichi Ohno observes grocery "pull" replenishment
-    1950s : Just-in-time production at Toyota
-    2004 : Kanban reaches software development at Microsoft
-    2007 : David J. Anderson publishes software Kanban principles
+```text
+History of Kanban
+
+1940s  ─┬─ Toyota improves production
+        └─ Taiichi Ohno observes grocery "pull" replenishment
+1950s  ─── Just-in-time production at Toyota
+2004   ─── Kanban reaches software development at Microsoft
+2007   ─── David J. Anderson publishes software Kanban principles
 ```
 
 Pull system: stock/serve only what is needed, when it is needed.
@@ -1268,47 +1173,27 @@ XP is especially useful when requirements change constantly and constant change 
 
 ## 8.2 Technical practices
 
-```mermaid
-flowchart LR
-    root(["XP Technical Practices"])
-    b1["TDD"]
-    root --> b1
-    b1_1["Red"]
-    b1 --> b1_1
-    b1_2["Green"]
-    b1 --> b1_2
-    b1_3["Refactor"]
-    b1 --> b1_3
-    b2["Pair Programming"]
-    root --> b2
-    b2_1["Driver"]
-    b2 --> b2_1
-    b2_2["Navigator"]
-    b2 --> b2_2
-    b3["Continuous Integration"]
-    root --> b3
-    b3_1["Merge often"]
-    b3 --> b3_1
-    b3_2["Automated tests"]
-    b3 --> b3_2
-    b4["Refactoring"]
-    root --> b4
-    b4_1["5-minute rule"]
-    b4 --> b4_1
-    b5["Simple Design"]
-    root --> b5
-    b5_1["Passes tests"]
-    b5 --> b5_1
-    b5_2["Reveals intent"]
-    b5 --> b5_2
-    b5_3["DRY"]
-    b5 --> b5_3
-    b5_4["Fewest elements"]
-    b5 --> b5_4
-    b6["Collective Ownership"]
-    root --> b6
-    b6_1["Anyone can change any code"]
-    b6 --> b6_1
+```text
+XP Technical Practices
+├─→ TDD
+│  ├─→ Red
+│  ├─→ Green
+│  └─→ Refactor
+├─→ Pair Programming
+│  ├─→ Driver
+│  └─→ Navigator
+├─→ Continuous Integration
+│  ├─→ Merge often
+│  └─→ Automated tests
+├─→ Refactoring
+│  └─→ 5-minute rule
+├─→ Simple Design
+│  ├─→ Passes tests
+│  ├─→ Reveals intent
+│  ├─→ DRY
+│  └─→ Fewest elements
+└─→ Collective Ownership
+   └─→ Anyone can change any code
 ```
 
 ### Pair programming
@@ -1322,11 +1207,11 @@ Two developers, one workstation:
 
 ### Test-Driven Development (TDD)
 
-```mermaid
-flowchart LR
-    A[Red<br/>Write a failing test] --> B[Green<br/>Write just enough code]
-    B --> C[Refactor<br/>Clean up without changing behaviour]
-    C --> A
+```text
+Red: write a failing test
+  → Green: write just enough code
+    → Refactor: clean up without changing behaviour
+      ↺ back to Red
 ```
 
 | Phase | Action |
@@ -1341,22 +1226,16 @@ TDD is **test-first**, not test-after. The test drives the design and provides a
 
 Developers merge into the shared mainline **multiple times a day**; automated build/tests run immediately. This prevents long-lived branches and late integration surprises.
 
-```mermaid
-sequenceDiagram
-    participant Dev1 as Developer 1
-    participant Dev2 as Developer 2
-    participant Repo as Shared Codebase
-    participant CI as CI Server
-    Dev1->>Repo: Merge code
-    Dev2->>Repo: Merge code
-    Repo->>CI: Trigger build & tests
-    CI->>CI: Run automated tests
-    alt Tests pass
-        CI->>Repo: Build successful
-    else Tests fail
-        CI->>Dev1: Notify failure
-        CI->>Dev2: Notify failure
-    end
+```text
+Participants: Developer 1, Developer 2, Shared Codebase, CI Server
+
+1. Developer 1 → Shared Codebase: Merge code
+2. Developer 2 → Shared Codebase: Merge code
+3. Shared Codebase → CI Server: Trigger build & tests
+4. CI Server → CI Server: Run automated tests
+5. [Tests pass] CI Server → Shared Codebase: Build successful
+6. [Tests fail] CI Server → Developer 1: Notify failure
+7. [Tests fail] CI Server → Developer 2: Notify failure
 ```
 
 ### Refactoring
@@ -1401,17 +1280,18 @@ It works only with safety nets:
 
 ## 8.4 XP life cycle
 
-```mermaid
-flowchart TD
-    A[Stories] --> B[Release Planning]
-    A --> C[Test Scenarios]
-    B --> D[Iteration 1-2 weeks]
-    C --> D
-    D --> E[Acceptance Test]
-    E --> F[Customer Approval]
-    F --> G[Small Release]
-    H[Spike] --> A
-    H --> B
+```text
+Spike
+├─→ Stories
+│  ├─→ Release Planning
+│  └─→ Test Scenarios
+└─→ Release Planning (direct input)
+
+Release Planning + Test Scenarios
+└─→ Iteration (1–2 weeks)
+   └─→ Acceptance Test
+      └─→ Customer Approval
+         └─→ Small Release
 ```
 
 | Step | What happens |
@@ -1439,18 +1319,18 @@ flowchart TD
 **Slack** = planned flexibility, typically **10–20% of iteration capacity**, reserved for optional work:
 refactoring, extra tests, infrastructure, learning/spikes. Slack can be skipped if urgent work appears.
 
-```mermaid
-flowchart LR
-    A[Iteration Planning] --> B[Select Stories]
-    B --> C[Reserve 10-20% Slack]
-    C --> D[Slack Stories]
-    D --> D1[Refactoring]
-    D --> D2[Extra tests]
-    D --> D3[Infrastructure]
-    D --> D4[Learning / Spike]
-    D --> E{Urgent work?}
-    E -->|Yes| F[Skip slack]
-    E -->|No| G[Complete slack]
+```text
+Iteration Planning
+└─→ Select Stories
+   └─→ Reserve 10-20% Slack
+      └─→ Slack Stories
+         ├─→ Refactoring
+         ├─→ Extra tests
+         ├─→ Infrastructure
+         ├─→ Learning / Spike
+         └─→ Urgent work?
+            ├─[Yes]→ Skip slack
+            └─[No]→ Complete slack
 ```
 
 ## 8.6 Roles
@@ -1518,15 +1398,15 @@ Small team · constant customer contact · adaptable team · technically skilled
 
 > **Lean is not a methodology** like Scrum or Waterfall. It is a **set of principles** that can be combined with any methodology.
 
-```mermaid
-timeline
-    title Evolution of Lean
-    1948-1975 : Toyota Production System
-    1988 : John Krafcik coins "Lean Production System"
-    1990s : "The Toyota Way" documented by Liker
-    2000s : Lean spreads to software and IT
-    2003 : Lean Software Development (Poppendiecks)
-    2010s : Kanban evolves as a Lean method (Anderson)
+```text
+Evolution of Lean
+
+1948–1975  ─── Toyota Production System
+1988       ─── John Krafcik coins "Lean Production System"
+1990s      ─── "The Toyota Way" documented by Liker
+2000s      ─── Lean spreads to software and IT
+2003       ─── Lean Software Development (Poppendiecks)
+2010s      ─── Kanban evolves as a Lean method (Anderson)
 ```
 
 | Milestone | Contribution |
@@ -1539,13 +1419,10 @@ timeline
 
 ## 9.2 Five Lean principles
 
-```mermaid
-flowchart TD
-    A[1. Identify Value] --> B[2. Map the Value Stream]
-    B --> C[3. Create Flow]
-    C --> D[4. Establish Pull]
-    D --> E[5. Continuous Improvement]
-    E --> A
+```text
+1. Identify Value → 2. Map the Value Stream → 3. Create Flow → 4. Establish Pull
+  → 5. Continuous Improvement
+    ↺ back to 1. Identify Value
 ```
 
 | # | Principle | Key question / action |
@@ -1572,27 +1449,17 @@ flowchart TD
 | **Mura** | Inconsistency | Variable quality, defects, uneven flow | Standardise, reduce variation |
 | **Muda** | Waste | Non-value-adding work | Eliminate |
 
-```mermaid
-flowchart LR
-    root(["Create Flow 3M"])
-    b1["Muri"]
-    root --> b1
-    b1_1["Overburden"]
-    b1 --> b1_1
-    b1_2["Bottlenecks"]
-    b1 --> b1_2
-    b2["Mura"]
-    root --> b2
-    b2_1["Inconsistency"]
-    b2 --> b2_1
-    b2_2["Defects"]
-    b2 --> b2_2
-    b3["Muda"]
-    root --> b3
-    b3_1["Waste"]
-    b3 --> b3_1
-    b3_2["Non-value tasks"]
-    b3 --> b3_2
+```text
+Create Flow 3M
+├─→ Muri
+│  ├─→ Overburden
+│  └─→ Bottlenecks
+├─→ Mura
+│  ├─→ Inconsistency
+│  └─→ Defects
+└─→ Muda
+   ├─→ Waste
+   └─→ Non-value tasks
 ```
 
 ## 9.4 The 8 wastes (software)
@@ -1624,17 +1491,17 @@ Eliminate waste · small batches · continuous delivery · limit WIP · automati
 | Long-term continuous improvement | Ongoing workflow management |
 | Metrics: lead time, throughput, value | Metrics: WIP, cycle time, cumulative flow |
 
-```mermaid
-flowchart LR
-    A[Lean Principles] --> B[Kanban Practices]
-    A --> A1[Eliminate waste]
-    A --> A2[Deliver value]
-    A --> A3[Improve flow]
-    A --> A4[Kaizen]
-    B --> B1[Visualise work]
-    B --> B2[Limit WIP]
-    B --> B3[Pull work]
-    B --> B4[Measure flow]
+```text
+Lean Principles
+├─→ Kanban Practices
+│  ├─→ Visualise work
+│  ├─→ Limit WIP
+│  ├─→ Pull work
+│  └─→ Measure flow
+├─→ Eliminate waste
+├─→ Deliver value
+├─→ Improve flow
+└─→ Kaizen
 ```
 
 ## 9.7 Value Stream Mapping (VSM)
@@ -1659,20 +1526,32 @@ flowchart LR
 | 12 | Wait for re-test | Wait | 0.25 | NVA |
 | 13 | Retest and close | Process | 0.25 | VA |
 
-```mermaid
-flowchart LR
-    A[Requirements<br/>1d VA] --> B[Approval wait<br/>1d NVA]
-    B --> C[Env setup<br/>0.5d VA]
-    C --> D[DB wait<br/>0.5d NVA]
-    D --> E[Code<br/>2d VA]
-    E --> F[Review wait<br/>1d NVA]
-    F --> G[Peer review<br/>0.5d VA]
-    G --> H[Fix comments<br/>0.5d VA]
-    H --> I[CI/CD wait<br/>0.25d NVA]
-    I --> J[QA test<br/>1d VA]
-    J --> K[Fix bug<br/>1d VA]
-    K --> L[Retest wait<br/>0.25d NVA]
-    L --> M[Retest & close<br/>0.25d VA]
+```text
+Requirements           1d     VA
+  ↓
+Approval wait          1d     NVA
+  ↓
+Environment setup      0.5d   VA
+  ↓
+DB access wait         0.5d   NVA
+  ↓
+Code login             2d     VA
+  ↓
+Code review wait       1d     NVA
+  ↓
+Peer review            0.5d   VA
+  ↓
+Fix review comments    0.5d   VA
+  ↓
+CI/CD wait             0.25d  NVA
+  ↓
+QA tests               1d     VA
+  ↓
+Fix bug                1d     VA
+  ↓
+Retest wait            0.25d  NVA
+  ↓
+Retest and close       0.25d  VA
 ```
 
 **Calculations**
@@ -1724,27 +1603,17 @@ Lead time = 4.7 days  (down from 10 days, ~53% improvement)
 
 Agile began with **small co-located teams (5–9 people)**. Modern products need dozens/hundreds of developers across teams, time zones, and domains. The challenge: **keep collaboration, transparency, and continuous improvement with 20+ teams on one product.**
 
-```mermaid
-flowchart LR
-    root(["Scaling Agile"])
-    b1["LeSS"]
-    root --> b1
-    b1_1["LeSS 2-8 teams"]
-    b1 --> b1_1
-    b1_2["LeSS Huge 8+ teams"]
-    b1 --> b1_2
-    b1_3["Requirement Areas"]
-    b1 --> b1_3
-    b2["SAFe"]
-    root --> b2
-    b2_1["ART"]
-    b2 --> b2_1
-    b2_2["PI Planning"]
-    b2 --> b2_2
-    b2_3["New roles"]
-    b2 --> b2_3
-    b2_4["4 configurations"]
-    b2 --> b2_4
+```text
+Scaling Agile
+├─→ LeSS
+│  ├─→ LeSS (2–8 teams)
+│  ├─→ LeSS Huge (8+ teams)
+│  └─→ Requirement Areas
+└─→ SAFe
+   ├─→ ART
+   ├─→ PI Planning
+   ├─→ New roles
+   └─→ 4 configurations
 ```
 
 ## 10.2 LeSS — Large-Scale Scrum
@@ -1758,11 +1627,11 @@ flowchart LR
 
 **LeSS structure — four layers**
 
-```mermaid
-flowchart TD
-    A[Principles<br/>core mindset] --> B[Rules<br/>mandatory framework]
-    B --> C[Guides<br/>recommended practices]
-    C --> D[Experiments<br/>ideas to try]
+```text
+Principles (core mindset)
+└─→ Rules (mandatory framework)
+   └─→ Guides (recommended practices)
+      └─→ Experiments (ideas to try)
 ```
 
 | Layer | Meaning |
@@ -1798,34 +1667,34 @@ flowchart TD
 - **Team retrospectives + Overall Retrospective** with team representatives, Scrum Masters, and PO.
 - Coordination is **direct between teams**, with no extra management layer.
 
-```mermaid
-flowchart LR
-    A[One PO<br/>One Product Backlog] --> B[Sprint Planning 1<br/>All teams: WHAT]
-    B --> C[Sprint Planning 2<br/>Each team: HOW]
-    C --> D[Team Sprint Backlogs]
-    D --> E[Daily Scrums]
-    E --> F[Joint Sprint Review]
-    F --> G[Team Retrospectives]
-    G --> H[Overall Retrospective]
-    H --> B
+```text
+One PO + One Product Backlog
+└─→ Sprint Planning 1 (all teams: WHAT)
+   └─→ Sprint Planning 2 (each team: HOW)
+      └─→ Team Sprint Backlogs
+         └─→ Daily Scrums
+            └─→ Joint Sprint Review
+               └─→ Team Retrospectives
+                  └─→ Overall Retrospective
+                     └─↺ back to Sprint Planning 1
 ```
 
 **LeSS Huge (8+ teams)**
 
-```mermaid
-flowchart TD
-    A[Chief Product Owner] --> B[Global Product Backlog]
-    B --> C[Area 1 Backlog]
-    B --> D[Area 2 Backlog]
-    B --> E[Area N Backlog]
-    C --> C1[Area PO 1 + 4-8 teams]
-    D --> D1[Area PO 2 + 4-8 teams]
-    E --> E1[Area PO N + 4-8 teams]
-    C1 --> F[Shared Sprint]
-    D1 --> F
-    E1 --> F
-    F --> G[Shared Sprint Review]
-    G --> H[Overall Retrospective]
+```text
+Chief Product Owner
+└─→ Global Product Backlog
+   ├─→ Area 1 Backlog
+   │  └─→ Area PO 1 + 4–8 teams
+   │     └─→ Shared Sprint
+   │        └─→ Shared Sprint Review
+   │           └─→ Overall Retrospective
+   ├─→ Area 2 Backlog
+   │  └─→ Area PO 2 + 4–8 teams
+   │     └─→ Shared Sprint (see above)
+   └─→ Area N Backlog
+      └─→ Area PO N + 4–8 teams
+         └─→ Shared Sprint (see above)
 ```
 
 **Requirement Areas** partition the global backlog by customer value/domain. Each area has an **Area Product Owner** and **4–8 feature teams**. One **Chief Product Owner** owns the global backlog and overall product direction.
@@ -1864,15 +1733,9 @@ Built from **Lean + Agile + DevOps + Systems Thinking**. Attractive in regulated
 - **Agile Release Train (ART)** = a long-lived **team of teams** (typically 50–125 people) with a shared vision, backlog, roadmap, and fixed schedule.
 - **Program Increment (PI)** = a **timeboxed planning and execution cycle of 8–12 weeks**, containing PI Planning, iterations, system demos, and Inspect & Adapt.
 
-```mermaid
-flowchart LR
-    A[PI Planning] --> B[Iteration 1]
-    B --> C[Iteration 2]
-    C --> D[Iteration 3]
-    D --> E[Iteration 4]
-    E --> F[System Demo]
-    F --> G[Inspect & Adapt]
-    G --> A
+```text
+PI Planning → Iteration 1 → Iteration 2 → Iteration 3 → Iteration 4 → System Demo → Inspect & Adapt
+    ↺ back to PI Planning
 ```
 
 **SAFe roles vs Scrum**
@@ -1958,33 +1821,20 @@ flowchart LR
 | **Team size** | Small–medium | Flexible | Small, highly collaborative |
 | **Best for** | Feature-rich products with evolving scope | Maintenance, support, unpredictable flow | R&D, startups, high-quality/volatile work |
 
-```mermaid
-flowchart LR
-    root(["Agile Frameworks"])
-    b1["Scrum"]
-    root --> b1
-    b1_1["Iterative"]
-    b1 --> b1_1
-    b1_2["Timeboxed"]
-    b1 --> b1_2
-    b1_3["Role-based"]
-    b1 --> b1_3
-    b2["Kanban"]
-    root --> b2
-    b2_1["Flow-based"]
-    b2 --> b2_1
-    b2_2["Visual"]
-    b2 --> b2_2
-    b2_3["WIP-limited"]
-    b2 --> b2_3
-    b3["XP"]
-    root --> b3
-    b3_1["Engineering-focused"]
-    b3 --> b3_1
-    b3_2["Quality-driven"]
-    b3 --> b3_2
-    b3_3["Customer-centric"]
-    b3 --> b3_3
+```text
+Agile Frameworks
+├─→ Scrum
+│  ├─→ Iterative
+│  ├─→ Timeboxed
+│  └─→ Role-based
+├─→ Kanban
+│  ├─→ Flow-based
+│  ├─→ Visual
+│  └─→ WIP-limited
+└─→ XP
+   ├─→ Engineering-focused
+   ├─→ Quality-driven
+   └─→ Customer-centric
 ```
 
 ## 11.2 When to choose each
@@ -2053,53 +1903,30 @@ Frameworks are not mutually exclusive:
 
 It answers four stakeholder questions: *How much will it cost? How long will it take? How many developers? When can we deliver?*
 
-```mermaid
-flowchart LR
-    root(["Software Estimation"])
-    b1["Size"]
-    root --> b1
-    b1_1["Story Points"]
-    b1 --> b1_1
-    b1_2["Function Points"]
-    b1 --> b1_2
-    b1_3["Features"]
-    b1 --> b1_3
-    b1_4["Use Cases"]
-    b1 --> b1_4
-    b2["Effort"]
-    root --> b2
-    b2_1["Person-hours"]
-    b2 --> b2_1
-    b2_2["Person-days"]
-    b2 --> b2_2
-    b2_3["Person-weeks"]
-    b2 --> b2_3
-    b3["Duration"]
-    root --> b3
-    b3_1["Days"]
-    b3 --> b3_1
-    b3_2["Weeks"]
-    b3 --> b3_2
-    b3_3["Months"]
-    b3 --> b3_3
-    b4["Resources"]
-    root --> b4
-    b4_1["People"]
-    b4 --> b4_1
-    b4_2["Hardware"]
-    b4 --> b4_2
-    b4_3["Tools"]
-    b4 --> b4_3
-    b4_4["Environments"]
-    b4 --> b4_4
-    b5["Cost"]
-    root --> b5
-    b5_1["Effort x Rate"]
-    b5 --> b5_1
-    b5_2["Cloud Services"]
-    b5 --> b5_2
-    b5_3["Licenses"]
-    b5 --> b5_3
+```text
+Software Estimation
+├─→ Size
+│  ├─→ Story Points
+│  ├─→ Function Points
+│  ├─→ Features
+│  └─→ Use Cases
+├─→ Effort
+│  ├─→ Person-hours
+│  ├─→ Person-days
+│  └─→ Person-weeks
+├─→ Duration
+│  ├─→ Days
+│  ├─→ Weeks
+│  └─→ Months
+├─→ Resources
+│  ├─→ People
+│  ├─→ Hardware
+│  ├─→ Tools
+│  └─→ Environments
+└─→ Cost
+   ├─→ Effort × Rate
+   ├─→ Cloud Services
+   └─→ Licenses
 ```
 
 | Dimension | Question | Unit / method |
@@ -2120,25 +1947,23 @@ flowchart LR
 | **Release planning** | Estimate features for an upcoming release | Multiple sprints |
 | **Sprint / iteration planning** | Select and estimate the next Sprint's work | Current Sprint |
 
-```mermaid
-flowchart LR
-    A[Project Initiation<br/>whole project] --> B[Release Planning<br/>multiple sprints]
-    B --> C[Sprint Planning<br/>current sprint]
-    C --> D[Sprint Execution]
+```text
+Project Initiation (whole project) → Release Planning (multiple sprints)
+  → Sprint Planning (current sprint) → Sprint Execution
 ```
 
 ## 12.3 The estimation process
 
 > **Key principle:** estimate **one primary quantity** — usually **size** or **effort**. Resources, duration, and cost are **derived**.
 
-```mermaid
-flowchart TD
-    A[Estimate Size or Effort] --> B[Derive Resources]
-    A --> C[Derive Duration]
-    A --> D[Derive Cost]
-    B --> E[Complete Project Estimate]
-    C --> E
-    D --> E
+```text
+Estimate Size or Effort
+├─→ Derive Resources
+│  └─→ Complete Project Estimate
+├─→ Derive Duration
+│  └─→ Complete Project Estimate (see above)
+└─→ Derive Cost
+   └─→ Complete Project Estimate (see above)
 ```
 
 **Example flow:** size in story points → determine velocity → **duration = size ÷ velocity** → **cost = effort × rate + expenses**.
@@ -2189,37 +2014,22 @@ The key question is comparative: *"Compared to Login, how much bigger is Payment
 
 ### Three factors
 
-```mermaid
-flowchart LR
-    root(["Story Points Factors"])
-    b1["Risk"]
-    root --> b1
-    b1_1["New technology"]
-    b1 --> b1_1
-    b1_2["Unclear requirements"]
-    b1 --> b1_2
-    b1_3["External dependencies"]
-    b1 --> b1_3
-    b1_4["Team experience"]
-    b1 --> b1_4
-    b2["Complexity"]
-    root --> b2
-    b2_1["Technical difficulty"]
-    b2 --> b2_1
-    b2_2["Business logic"]
-    b2 --> b2_2
-    b2_3["Number of conditions"]
-    b2 --> b2_3
-    b3["Volume"]
-    root --> b3
-    b3_1["Screens"]
-    b3 --> b3_1
-    b3_2["Modules"]
-    b3 --> b3_2
-    b3_3["Amount of coding"]
-    b3 --> b3_3
-    b3_4["Activities"]
-    b3 --> b3_4
+```text
+Story Points Factors
+├─→ Risk
+│  ├─→ New technology
+│  ├─→ Unclear requirements
+│  ├─→ External dependencies
+│  └─→ Team experience
+├─→ Complexity
+│  ├─→ Technical difficulty
+│  ├─→ Business logic
+│  └─→ Number of conditions
+└─→ Volume
+   ├─→ Screens
+   ├─→ Modules
+   ├─→ Amount of coding
+   └─→ Activities
 ```
 
 | Factor | Question | Includes |
@@ -2232,15 +2042,15 @@ flowchart LR
 
 ### Story point estimation steps
 
-```mermaid
-flowchart TD
-    A[Select reference story] --> B[Understand new story]
-    B --> C[Compare with reference]
-    C --> D[Assign points as a team]
-    D --> E{Consensus?}
-    E -->|Yes| F[Record estimate]
-    E -->|No| G[Discuss differences]
-    G --> D
+```text
+Select reference story
+└─→ Understand new story
+   └─→ Compare with reference
+      └─→ Assign points as a team
+         └─→ Consensus?
+            ├─[Yes]→ Record estimate
+            └─[No]→ Discuss differences
+               └─↺ back to Assign points as a team
 ```
 
 1. Select a **reference/baseline story**.
@@ -2255,20 +2065,16 @@ flowchart TD
 
 **Cards:** `0, 1, 2, 3, 5, 8, 13, 20, 40, 100, ? (uncertain), ∞ (too big)`.
 
-```mermaid
-sequenceDiagram
-    participant PO as Product Owner
-    participant Team as Team Members
-    PO->>Team: Present user story and answer questions
-    Team->>Team: Discuss complexity and risks
-    Team->>Team: Each member selects a card privately
-    Team->>Team: All reveal at once
-    alt Estimates vary a lot
-        Team->>Team: Lowest and highest explain why
-        Team->>Team: Re-estimate
-    else Consensus reached
-        Team->>PO: Record estimate
-    end
+```text
+Participants: Product Owner, Team Members
+
+1. Product Owner → Team Members: Present user story and answer questions
+2. Team Members → Team Members: Discuss complexity and risks
+3. Team Members → Team Members: Each member selects a card privately
+4. Team Members → Team Members: All reveal at once
+5. [Estimates vary a lot] Team Members → Team Members: Lowest and highest explain why
+6. [Estimates vary a lot] Team Members → Team Members: Re-estimate
+7. [Consensus reached] Team Members → Product Owner: Record estimate
 ```
 
 **Why it works:** prevents **anchoring bias** (independent first vote), encourages discussion, leverages collective intelligence, builds consensus. It produces **consensus, not an average**.
@@ -2279,10 +2085,10 @@ sequenceDiagram
 
 For **large, unestimated backlogs** (new projects, release-planning prep).
 
-```mermaid
-flowchart TD
-    A[1. Silent relative sizing<br/>each person places stories alone] --> B[2. Editing the wall<br/>team rearranges until consensus]
-    B --> C[3. Bucketing<br/>assign points to groups]
+```text
+1. Silent relative sizing — each person places stories alone
+  → 2. Editing the wall — team rearranges until consensus
+    → 3. Bucketing — assign points to groups
 ```
 
 | Step | What happens |
@@ -2319,14 +2125,11 @@ PERT (Beta):         E = (O + 4M + P) / 6       → biased to most likely
 
 **Example:** O = 2, M = 3, P = 4 → triangular `9/3 = 3`; PERT `(2 + 12 + 4)/6 = 3`.
 
-```mermaid
-flowchart LR
-    A[O = 2] --> D[Triangular: 3]
-    B[M = 3] --> D
-    C[P = 4] --> D
-    A --> E[PERT: 3]
-    B --> E
-    C --> E
+```text
+Inputs: O = 2, M = 3, P = 4
+        │
+        ├─→ Triangular: (2 + 3 + 4) / 3 = 3
+        └─→ PERT:       (2 + 12 + 4) / 6 = 3
 ```
 
 ## 12.9 From size to duration: velocity
@@ -2340,11 +2143,13 @@ Duration (sprints) = Total Story Points ÷ Velocity
 
 **Example:** backlog = 120 points, velocity = 30 points/sprint → **4 sprints**; with 2-week sprints → **8 weeks**.
 
-```mermaid
-flowchart LR
-    A[Total points<br/>120] --> C[Duration<br/>4 sprints]
-    B[Velocity<br/>30/sprint] --> C
-    C --> D[8 weeks<br/>2-week sprints]
+```text
+Total points = 120
+Velocity = 30 points / sprint
+        │
+        └─→ Duration = 120 / 30 = 4 sprints
+                  │
+                  └─→ 8 weeks (2-week sprints)
 ```
 
 > Velocity is **team-specific**, an **average**, and **not a guarantee**. Never compare velocity across teams.
@@ -2395,14 +2200,14 @@ It is a **project map** giving context and direction on product goals, vision, a
 | **Feedback** | Late | Continuous |
 | **Flexibility** | Rigid | Flexible |
 
-```mermaid
-flowchart LR
-    A[Product Vision] --> B[Product Roadmap]
-    B --> C[Release Plan]
-    C --> D[Sprint Planning]
-    D --> E[Sprint Execution]
-    E --> F[Release]
-    F -->|Feedback| C
+```text
+Product Vision
+└─→ Product Roadmap
+   └─→ Release Plan
+      └─→ Sprint Planning
+         └─→ Sprint Execution
+            └─→ Release
+               └─[Feedback] ↺ back to Release Plan
 ```
 
 ## 13.2 Purpose and scope
@@ -2433,45 +2238,32 @@ flowchart LR
 | **Frequency** | Quarterly / per release cycle | Every Sprint |
 | **Detail** | High-level features | Task-level |
 
-```mermaid
-flowchart TD
-    A[Product Vision & Roadmap] --> B[Release Planning<br/>1-3 months]
-    B --> C[Sprint Planning<br/>1-4 weeks]
-    C --> D[Sprint Execution<br/>Daily Scrum]
-    D --> E[Sprint Review & Retro]
-    E --> C
-    E -->|Feedback| B
+```text
+Product Vision & Roadmap
+└─→ Release Planning (1–3 months)
+   └─→ Sprint Planning (1–4 weeks)
+      └─→ Sprint Execution + Daily Scrum
+         └─→ Sprint Review & Retrospective
+            ├─↺ back to Sprint Planning
+            └─[Feedback] ↺ back to Release Planning
 ```
 
 ## 13.4 Inputs
 
-```mermaid
-flowchart LR
-    root(["Inputs to Release Planning"])
-    b1["Product Vision"]
-    root --> b1
-    b1_1["High-level goal"]
-    b1 --> b1_1
-    b1_2["Guides direction"]
-    b1 --> b1_2
-    b1_3["PO / stakeholders"]
-    b1 --> b1_3
-    b2["Product Roadmap"]
-    root --> b2
-    b2_1["Timeline of features"]
-    b2 --> b2_1
-    b2_2["Sequence and timing"]
-    b2 --> b2_2
-    b2_3["Quarterly / MVP / major releases"]
-    b2 --> b2_3
-    b3["Prioritized Product Backlog"]
-    root --> b3
-    b3_1["Stories by value"]
-    b3 --> b3_1
-    b3_2["Top items refined"]
-    b3 --> b3_2
-    b3_3["Ready for release"]
-    b3 --> b3_3
+```text
+Inputs to Release Planning
+├─→ Product Vision
+│  ├─→ High-level goal
+│  ├─→ Guides direction
+│  └─→ PO / stakeholders
+├─→ Product Roadmap
+│  ├─→ Timeline of features
+│  ├─→ Sequence and timing
+│  └─→ Quarterly / MVP / major releases
+└─→ Prioritized Product Backlog
+   ├─→ Stories by value
+   ├─→ Top items refined
+   └─→ Ready for release
 ```
 
 | Input | Meaning |
@@ -2484,37 +2276,22 @@ flowchart LR
 
 ## 13.5 MoSCoW and the MVP
 
-```mermaid
-flowchart LR
-    root(["MoSCoW Prioritization"])
-    b1["Must Have"]
-    root --> b1
-    b1_1["Highest business value"]
-    b1 --> b1_1
-    b1_2["Defines USP"]
-    b1 --> b1_2
-    b1_3["Non-negotiable"]
-    b1 --> b1_3
-    b2["Should Have"]
-    root --> b2
-    b2_1["Important"]
-    b2 --> b2_1
-    b2_2["Significant value"]
-    b2 --> b2_2
-    b2_3["Painful workaround"]
-    b2 --> b2_3
-    b3["Could Have"]
-    root --> b3
-    b3_1["Nice to have"]
-    b3 --> b3_1
-    b3_2["Can be left out"]
-    b3 --> b3_2
-    b4["Won't Have"]
-    root --> b4
-    b4_1["Not a priority"]
-    b4 --> b4_1
-    b4_2["Explicitly excluded"]
-    b4 --> b4_2
+```text
+MoSCoW Prioritization
+├─→ Must Have
+│  ├─→ Highest business value
+│  ├─→ Defines USP
+│  └─→ Non-negotiable
+├─→ Should Have
+│  ├─→ Important
+│  ├─→ Significant value
+│  └─→ Painful workaround
+├─→ Could Have
+│  ├─→ Nice to have
+│  └─→ Can be left out
+└─→ Won't Have
+   ├─→ Not a priority
+   └─→ Explicitly excluded
 ```
 
 | Category | Description | Example |
@@ -2549,12 +2326,9 @@ Release duration = 3 sprints
 Release capacity = 22.5 × 3 = 67.5 story points
 ```
 
-```mermaid
-flowchart LR
-    A[Prioritized backlog] --> B[Estimate in story points]
-    B --> C[Historical velocity]
-    C --> D[Capacity = velocity x sprints]
-    D --> E[Select backlog items that fit]
+```text
+Prioritized backlog → Estimate in story points → Historical velocity
+  → Capacity = velocity × sprints → Select backlog items that fit
 ```
 
 **Backlog selection example:**
@@ -2574,11 +2348,11 @@ flowchart LR
 
 ## 13.7 Types of release planning
 
-```mermaid
-flowchart TD
-    A[Types of Release Planning] --> B[Feature-Based<br/>release when ready]
-    A --> C[Time-Based<br/>fixed date, variable scope]
-    A --> D[Continuous<br/>daily / weekly]
+```text
+Types of Release Planning
+├─→ Feature-Based (release when ready)
+├─→ Time-Based (fixed date, variable scope)
+└─→ Continuous (daily / weekly)
 ```
 
 | Aspect | Feature-based | Time-based | Continuous |
@@ -2598,22 +2372,23 @@ flowchart TD
 
 A **product roadmap** = strategic visual summary of how the product evolves: **themes, timeframes, features, milestones, dependencies**.
 
-```mermaid
-gantt
-    title Product Roadmap - Example
-    dateFormat  YYYY-MM-DD
-    section Q1
-    User Authentication :a1, 2025-01-01, 30d
-    Basic CRUD         :a2, after a1, 30d
-    section Q2
-    Real-time Editing  :b1, 2025-04-01, 45d
-    Comments           :b2, after b1, 30d
-    section Q3
-    Dashboards         :c1, 2025-07-01, 45d
-    Reports            :c2, after c1, 30d
-    section Q4
-    Mobile iOS         :d1, 2025-10-01, 60d
-    Mobile Android     :d2, after d1, 60d
+```text
+Product Roadmap — Example
+
+Q1  Jan 2025
+    User Authentication  ██████ 30d
+    Basic CRUD           ██████ 30d  (after Authentication)
+Q2  Apr 2025
+    Real-time Editing    █████████ 45d
+    Comments             ██████ 30d  (after Real-time Editing)
+Q3  Jul 2025
+    Dashboards           █████████ 45d
+    Reports              ██████ 30d  (after Dashboards)
+Q4  Oct 2025
+    Mobile iOS           ████████████ 60d
+    Mobile Android       ████████████ 60d  (after Mobile iOS)
+
+Bars show sequence and duration, not calendar scale.
 ```
 
 **Single-team release plan**
@@ -2627,34 +2402,26 @@ gantt
 
 **Multi-team release plan**
 
-```mermaid
-flowchart TD
-    subgraph Backlog[Product Backlog]
-        A1[Architectural Story 1]
-        A2[Architectural Story 2]
-        F1[Functional Story 1]
-        F2[Functional Story 2]
-        F3[Functional Story 3]
-    end
-    subgraph T1[Team 1]
-        T1S1[Sprint 1]
-        T1S2[Sprint 2]
-        T1S3[Sprint 3]
-    end
-    subgraph T2[Team 2]
-        T2S1[Sprint 1]
-        T2S2[Sprint 2]
-        T2S3[Sprint 3]
-    end
-    A1 --> T1S1
-    A1 --> T2S1
-    A2 --> T1S2
-    A2 --> T2S2
-    F1 --> T1S2
-    F2 --> T1S3
-    F3 --> T2S3
-    T1S3 --> R1[Release 1]
-    T2S3 --> R1
+```text
+[Product Backlog]
+Architectural Story 1
+Architectural Story 2
+Functional Story 1
+Functional Story 2
+Functional Story 3
+
+[Team 1]
+Sprint 1 ← Architectural Story 1
+Sprint 2 ← Architectural Story 2, Functional Story 1
+Sprint 3 ← Functional Story 2
+
+[Team 2]
+Sprint 1 ← Architectural Story 1
+Sprint 2 ← Architectural Story 2
+Sprint 3 ← Functional Story 3
+
+[Release]
+Release 1 ← Team 1 Sprint 3, Team 2 Sprint 3
 ```
 
 **Key observations:** architectural stories come **first** (foundation) → functional stories follow; dependencies are **explicitly tracked**; releases occur after **multiple sprints**; teams share one product backlog.
@@ -2663,15 +2430,10 @@ flowchart TD
 
 **Release management** ensures software is delivered **consistently, predictably, and safely**, coordinating **features, bug fixes, and improvements** from development to production.
 
-```mermaid
-flowchart TD
-    A[PO prioritizes backlog] --> B[Team reviews story-point estimates]
-    B --> C[Determine velocity]
-    C --> D[Allocate stories to sprints]
-    D --> E[Prepare release plan]
-    E --> F[Sprint execution]
-    F --> G[Sprint Review & Retro]
-    G -->|Feedback & actual velocity| A
+```text
+PO prioritizes backlog → Team reviews story-point estimates → Determine velocity
+  → Allocate stories to sprints → Prepare release plan → Sprint execution → Sprint Review & Retro
+    ↺ [Feedback & actual velocity] back to PO prioritizes backlog
 ```
 
 1. PO prioritises the backlog by business value.
@@ -2718,16 +2480,16 @@ flowchart TD
 
 **Four core practices**
 
-```mermaid
-flowchart TD
-    A[Configuration Management] --> B[Version Control]
-    A --> C[Change Tracking]
-    A --> D[Branching & Merging]
-    A --> E[Configuration Baselines]
-    B --> B1[Store artifacts in VCS]
-    C --> C1[Record who, when, why]
-    D --> D1[Isolate work, merge after review]
-    E --> E1[Maintain stable versions]
+```text
+Configuration Management
+├─→ Version Control
+│  └─→ Store artifacts in VCS
+├─→ Change Tracking
+│  └─→ Record who, when, why
+├─→ Branching & Merging
+│  └─→ Isolate work, merge after review
+└─→ Configuration Baselines
+   └─→ Maintain stable versions
 ```
 
 | Practice | Purpose |
@@ -2763,12 +2525,10 @@ flowchart TD
 
 ## 14.3 VCS workflow and Git's three states
 
-```mermaid
-flowchart LR
-    A[Working Directory] -->|git add| B[Staging Area / Index]
-    B -->|git commit| C[Local Repository]
-    C -->|git push| D[Remote Repository]
-    D -->|git pull| A
+```text
+Working Directory ─[git add]→ Staging Area / Index ─[git commit]→ Local Repository
+  ─[git push]→ Remote Repository
+    ↺ [git pull] back to Working Directory
 ```
 
 | Step | Action |
@@ -2793,13 +2553,10 @@ flowchart LR
 
 A **conflict** occurs when multiple people edit the **same part of the same file**; the VCS detects overlapping edits during merge and **prevents overwriting** work.
 
-```mermaid
-flowchart TD
-    A[Developers edit same file] --> B[VCS detects conflict on merge]
-    B --> C[Prevents overwriting]
-    C --> D[Tools: markers, diff views, merge commands]
-    D --> E[Developer keeps / modifies / combines]
-    E --> F[Repository updated with integrated version]
+```text
+Developers edit same file → VCS detects conflict on merge → Prevents overwriting
+  → Tools: markers, diff views, merge commands → Developer keeps / modifies / combines
+  → Repository updated with integrated version
 ```
 
 ```text
@@ -2828,28 +2585,29 @@ Change from the incoming branch
 
 **Why:** isolation · parallel development · safe experimentation · release preparation · fast hotfixes.
 
-```mermaid
-gitGraph
-    commit id: "Initial"
-    branch develop
-    checkout develop
-    commit id: "Feature A start"
-    branch feature/login
-    checkout feature/login
-    commit id: "Add login"
-    commit id: "Fix login bug"
-    checkout develop
-    merge feature/login
-    branch release/1.0
-    checkout release/1.0
-    commit id: "Release prep"
-    checkout main
-    merge release/1.0 tag: "v1.0"
-    branch hotfix/critical
-    checkout hotfix/critical
-    commit id: "Fix critical bug"
-    checkout main
-    merge hotfix/critical tag: "v1.0.1"
+```text
+main
+  ● Initial
+  ● merge release/1.0 → tag v1.0
+  ● merge hotfix/critical → tag v1.0.1
+
+develop (branched from main)
+  ● Feature A start
+  ● merge feature/login
+  ● release/1.0 branches from here
+
+feature/login (branched from develop)
+  ● Add login
+  ● Fix login bug
+  ● merged into develop
+
+release/1.0 (branched from develop)
+  ● Release prep
+  ● merged into main, tag v1.0
+
+hotfix/critical (branched from main)
+  ● Fix critical bug
+  ● merged into main, tag v1.0.1
 ```
 
 | Branch | Purpose | Lifespan | From | Merges into |
@@ -2894,73 +2652,42 @@ Closes #123.
 
 ## 14.7 What belongs under version control
 
-```mermaid
-flowchart LR
-    root(["Artifacts Under Version Control"])
-    b1["Code"]
-    root --> b1
-    b1_1["Source files"]
-    b1 --> b1_1
-    b1_2["Libraries"]
-    b1 --> b1_2
-    b2["Config"]
-    root --> b2
-    b2_1["Environment configs"]
-    b2 --> b2_1
-    b2_2["App settings"]
-    b2 --> b2_2
-    b3["Tests"]
-    root --> b3
-    b3_1["Scripts"]
-    b3 --> b3_1
-    b3_2["Test data"]
-    b3 --> b3_2
-    b4["Documentation"]
-    root --> b4
-    b4_1["README"]
-    b4 --> b4_1
-    b4_2["API docs"]
-    b4 --> b4_2
-    b4_3["User guides"]
-    b4 --> b4_3
-    b5["UI/UX Assets"]
-    root --> b5
-    b5_1["Images"]
-    b5 --> b5_1
-    b5_2["Fonts"]
-    b5 --> b5_2
-    b5_3["Design files"]
-    b5 --> b5_3
-    b6["Database"]
-    root --> b6
-    b6_1["Schemas"]
-    b6 --> b6_1
-    b6_2["Migrations"]
-    b6 --> b6_2
-    b7["Build & Deploy"]
-    root --> b7
-    b7_1["CI/CD configs"]
-    b7 --> b7_1
-    b7_2["Dockerfiles"]
-    b7 --> b7_2
-    b8["Analytics"]
-    root --> b8
-    b8_1["Templates"]
-    b8 --> b8_1
-    b8_2["Dashboards"]
-    b8 --> b8_2
+```text
+Artifacts Under Version Control
+├─→ Code
+│  ├─→ Source files
+│  └─→ Libraries
+├─→ Config
+│  ├─→ Environment configs
+│  └─→ App settings
+├─→ Tests
+│  ├─→ Scripts
+│  └─→ Test data
+├─→ Documentation
+│  ├─→ README
+│  ├─→ API docs
+│  └─→ User guides
+├─→ UI/UX Assets
+│  ├─→ Images
+│  ├─→ Fonts
+│  └─→ Design files
+├─→ Database
+│  ├─→ Schemas
+│  └─→ Migrations
+├─→ Build & Deploy
+│  ├─→ CI/CD configs
+│  └─→ Dockerfiles
+└─→ Analytics
+   ├─→ Templates
+   └─→ Dashboards
 ```
 
 > Rule of thumb: version **everything needed to build, test, deploy, and document** the project.
 
 ## 14.8 CM during Agile project execution
 
-```mermaid
-flowchart TD
-    A[Version Control] --> B[Branches]
-    B --> C[Commit & Merge]
-    C --> D[Rollback]
-    D --> E[Configuration Consistency]
+```text
+Version Control → Branches → Commit & Merge → Rollback → Configuration Consistency
 ```
 
 | Practice | Description |
@@ -2971,22 +2698,17 @@ flowchart TD
 | **Rollback** | Restore a stable version after serious defects |
 | **Configuration consistency** | Keep dev / test / prod configs aligned |
 
-```mermaid
-sequenceDiagram
-    participant PO as Product Owner
-    participant Dev as Developer
-    participant VCS as Version Control
-    participant CI as CI/CD Pipeline
-    participant QA as QA Team
-    participant Prod as Production
-    PO->>Dev: User story
-    Dev->>VCS: Create feature branch
-    Dev->>VCS: Commit and push
-    VCS->>CI: Trigger build
-    CI->>QA: Deploy to test
-    QA->>VCS: Approve merge
-    VCS->>Prod: Merge to main, deploy
-    Prod->>VCS: Tag release
+```text
+Participants: Product Owner, Developer, Version Control, CI/CD Pipeline, QA Team, Production
+
+1. Product Owner → Developer: User story
+2. Developer → Version Control: Create feature branch
+3. Developer → Version Control: Commit and push
+4. Version Control → CI/CD Pipeline: Trigger build
+5. CI/CD Pipeline → QA Team: Deploy to test
+6. QA Team → Version Control: Approve merge
+7. Version Control → Production: Merge to main, deploy
+8. Production → Version Control: Tag release
 ```
 
 ## 14.9 Advantages and challenges
@@ -3021,12 +2743,12 @@ sequenceDiagram
 
 Traditional IT ran **separate silos**:
 
-```mermaid
-flowchart LR
-    A[Developers] -->|Package + docs| B[QA Team]
-    B -->|Install & test| C[Production Operations]
-    C -->|Deploy & manage| D[Production Environment]
-    A -.->|Little direct interaction| C
+```text
+Developers ─[Package + docs]→ QA Team ─[Install & test]→ Production Operations
+  ─[Deploy & manage]→ Production Environment
+
+Cross-links:
+  Developers ┄[Little direct interaction]→ Production Operations
 ```
 
 **Operations responsibilities:** infrastructure provisioning · deployment and releases · monitoring and logging · configuration management · incident response / on-call.
@@ -3048,16 +2770,12 @@ flowchart LR
 
 **Built on Agile + Lean:** incremental development, rapid delivery, accountability, collaboration, empathy, and **joint responsibility for business outcomes**.
 
-```mermaid
-flowchart TD
-    A[Agile Principles] --> B[DevOps Culture]
-    C[Lean Practices] --> B
-    B --> D[Continuous Delivery]
-    B --> E[Automation]
-    B --> F[Shared Responsibility]
-    D --> G[Faster Time to Market]
-    E --> G
-    F --> G
+```text
+Agile Principles ─┐
+Lean Practices ───┴─→ DevOps Culture
+                       ├─→ Continuous Delivery → Faster Time to Market
+                       ├─→ Automation → Faster Time to Market
+                       └─→ Shared Responsibility → Faster Time to Market
 ```
 
 ## 15.3 DevOps fundamentals
@@ -3072,15 +2790,10 @@ flowchart TD
 
 ## 15.4 How DevOps works
 
-```mermaid
-flowchart LR
-    A[Plan Release] --> B[Develop Code]
-    B --> C[Version Control]
-    C --> D[Continuous Integration<br/>auto build + test]
-    D --> E[Continuous Delivery<br/>auto deploy]
-    E --> F[Infrastructure as Code]
-    F --> G[Continuous Monitoring]
-    G -->|Feedback| A
+```text
+Plan Release → Develop Code → Version Control → Continuous Integration (auto build + test)
+  → Continuous Delivery (auto deploy) → Infrastructure as Code → Continuous Monitoring
+    ↺ [Feedback] back to Plan Release
 ```
 
 1. Plan the release collaboratively.
@@ -3097,26 +2810,23 @@ flowchart LR
 
 ## 15.5 DevOps life cycle
 
-```mermaid
-flowchart TD
-    A[PLAN] --> B[CREATE]
-    B --> C[VERIFY]
-    C --> D[PACKAGE]
-    D --> E[DEPLOY]
-    E --> F[MONITOR]
-    F --> A
-    G[SECURE] -.-> A
-    G -.-> B
-    G -.-> C
-    G -.-> D
-    G -.-> E
-    G -.-> F
-    H[GOVERN] -.-> A
-    H -.-> B
-    H -.-> C
-    H -.-> D
-    H -.-> E
-    H -.-> F
+```text
+PLAN → CREATE → VERIFY → PACKAGE → DEPLOY → MONITOR
+    ↺ back to PLAN
+
+Cross-links:
+  SECURE ┄→ PLAN
+  SECURE ┄→ CREATE
+  SECURE ┄→ VERIFY
+  SECURE ┄→ PACKAGE
+  SECURE ┄→ DEPLOY
+  SECURE ┄→ MONITOR
+  GOVERN ┄→ PLAN
+  GOVERN ┄→ CREATE
+  GOVERN ┄→ VERIFY
+  GOVERN ┄→ PACKAGE
+  GOVERN ┄→ DEPLOY
+  GOVERN ┄→ MONITOR
 ```
 
 | Stage | Meaning |
@@ -3156,13 +2866,13 @@ Manual deployment, server configuration, and testing introduce **delays, errors,
 
 **Continuous Deployment** = every passing change is **released to production automatically**, with **no human intervention**.
 
-```mermaid
-flowchart LR
-    A[Continuous<br/>Integration] --> B[Continuous<br/>Delivery]
-    B --> C[Continuous<br/>Deployment]
-    A -.->|can exist independently| A
-    B -.->|requires CI| A
-    C -.->|requires CD| B
+```text
+Continuous Integration → Continuous Delivery → Continuous Deployment
+
+Cross-links:
+  Continuous Integration ┄[can exist independently]→ (itself)
+  Continuous Delivery ┄[requires CI]→ Continuous Integration
+  Continuous Deployment ┄[requires CD]→ Continuous Delivery
 ```
 
 | Aspect | **CI** | **Continuous Delivery** | **Continuous Deployment** |
@@ -3180,19 +2890,14 @@ flowchart LR
 
 A **CI/CD pipeline** = a series of **automated steps** from code change to deployment, combining CI, continuous delivery, and continuous deployment.
 
-```mermaid
-flowchart LR
-    A[BUILD] --> B[TEST]
-    B --> C[DELIVER]
-    C --> D[DEPLOY]
-    subgraph CI
-        A
-        B
-    end
-    subgraph CD
-        C
-        D
-    end
+```text
+[CI]
+BUILD → TEST
+
+[CD]
+DELIVER → DEPLOY
+
+Handoff: TEST → DELIVER
 ```
 
 | Stage | Phase | What happens |
@@ -3202,79 +2907,52 @@ flowchart LR
 | **3. Deliver** | CD | Tested build packaged to **staging/pre-production**; ready for manual approval and UAT |
 | **4. Deploy** | CD | Auto-deploy to production (e.g. Kubernetes/AWS, rolling, zero downtime) |
 
-```mermaid
-flowchart TD
-    A[Code Commit] --> B[Build]
-    B --> C[Automated Tests]
-    C --> D{Tests pass?}
-    D -->|No| E[Notify team, fix immediately]
-    E --> A
-    D -->|Yes| F[Security / quality checks]
-    F --> G[Staging deployment]
-    G --> H{Manual approval?}
-    H -->|Reject| E
-    H -->|Approve| I[Production deployment]
-    I --> J[Monitoring & feedback]
-    J --> A
+```text
+Code Commit
+└─→ Build
+   └─→ Automated Tests
+      └─→ Tests pass?
+         ├─[No]→ Notify team, fix immediately
+         │  └─↺ back to Code Commit
+         └─[Yes]→ Security / quality checks
+            └─→ Staging deployment
+               └─→ Manual approval?
+                  ├─[Reject]→ Notify team, fix immediately (see above)
+                  └─[Approve]→ Production deployment
+                     └─→ Monitoring & feedback
+                        └─↺ back to Code Commit
 ```
 
 ## 15.9 Common CI/CD tools
 
-```mermaid
-flowchart LR
-    root(["CI/CD Tools"])
-    b1["Version Control"]
-    root --> b1
-    b1_1["Git"]
-    b1 --> b1_1
-    b1_2["GitHub"]
-    b1 --> b1_2
-    b1_3["GitLab"]
-    b1 --> b1_3
-    b2["Build"]
-    root --> b2
-    b2_1["Jenkins"]
-    b2 --> b2_1
-    b2_2["Maven"]
-    b2 --> b2_2
-    b2_3["Gradle"]
-    b2 --> b2_3
-    b2_4["npm"]
-    b2 --> b2_4
-    b3["Test"]
-    root --> b3
-    b3_1["JUnit"]
-    b3 --> b3_1
-    b3_2["TestNG"]
-    b3 --> b3_2
-    b3_3["Selenium"]
-    b3 --> b3_3
-    b3_4["SonarQube"]
-    b3 --> b3_4
-    b4["Package"]
-    root --> b4
-    b4_1["Docker"]
-    b4 --> b4_1
-    b4_2["JFrog Artifactory"]
-    b4 --> b4_2
-    b4_3["Nexus"]
-    b4 --> b4_3
-    b5["Deploy"]
-    root --> b5
-    b5_1["Kubernetes"]
-    b5 --> b5_1
-    b5_2["Ansible"]
-    b5 --> b5_2
-    b5_3["ArgoCD"]
-    b5 --> b5_3
-    b6["Monitoring"]
-    root --> b6
-    b6_1["Prometheus"]
-    b6 --> b6_1
-    b6_2["Grafana"]
-    b6 --> b6_2
-    b6_3["ELK Stack"]
-    b6 --> b6_3
+```text
+CI/CD Tools
+├─→ Version Control
+│  ├─→ Git
+│  ├─→ GitHub
+│  └─→ GitLab
+├─→ Build
+│  ├─→ Jenkins
+│  ├─→ Maven
+│  ├─→ Gradle
+│  └─→ npm
+├─→ Test
+│  ├─→ JUnit
+│  ├─→ TestNG
+│  ├─→ Selenium
+│  └─→ SonarQube
+├─→ Package
+│  ├─→ Docker
+│  ├─→ JFrog Artifactory
+│  └─→ Nexus
+├─→ Deploy
+│  ├─→ Kubernetes
+│  ├─→ Ansible
+│  └─→ ArgoCD
+└─→ Monitoring
+   ├─→ Prometheus
+   ├─→ Grafana
+   └─→ ELK Stack
 ```
 
 | Stage | Tools | Example |
@@ -3288,17 +2966,17 @@ flowchart LR
 
 **DevSecOps** = **Dev** + **Sec** + **Ops**: security is **automated and built into every stage**, not bolted on at the end.
 
-```mermaid
-flowchart TD
-    A[Planning] --> B[Coding]
-    B --> C[CI]
-    C --> D[CD]
-    D --> E[Operations & Monitoring]
-    A --> A1[Threat modeling<br/>security requirements]
-    B --> B1[Secure coding<br/>static analysis]
-    C --> C1[SAST<br/>dependency scanning]
-    D --> D1[DAST<br/>container & IaC scanning]
-    E --> E1[Detect suspicious activity<br/>auto-block malicious IPs]
+```text
+Planning
+├─→ Coding
+│  ├─→ CI
+│  │  ├─→ CD
+│  │  │  ├─→ Operations & Monitoring
+│  │  │  │  └─→ Detect suspicious activity → auto-block malicious IPs
+│  │  │  └─→ DAST: container & IaC scanning
+│  │  └─→ SAST: dependency scanning
+│  └─→ Secure coding: static analysis
+└─→ Threat modeling: security requirements
 ```
 
 | Stage | Activities |
@@ -3322,14 +3000,10 @@ flowchart TD
 
 **IaC** = automating the **provisioning and management** of infrastructure with **configuration files** instead of manual processes — treating infrastructure as software.
 
-```mermaid
-flowchart LR
-    A[Configuration Files] --> B[Version Control]
-    B --> C[Review & Approval]
-    C --> D[Automated Provisioning]
-    D --> E[Servers, Networks,<br/>Databases, Security]
-    E --> F[Monitoring]
-    F -->|Feedback| A
+```text
+Configuration Files → Version Control → Review & Approval → Automated Provisioning
+  → Servers, Networks, Databases, Security → Monitoring
+    ↺ [Feedback] back to Configuration Files
 ```
 
 | Aspect | Manual configuration | IaC |
@@ -3430,30 +3104,30 @@ flowchart LR
 | **Defect management** | Identify, communicate, track and verify defects with developers |
 | **Release management** | Check readiness, run final regression, report outstanding defects, support sign-off |
 
-```mermaid
-flowchart TD
-    A[Defect discovered] --> B[Record and describe]
-    B --> C[Developer investigates]
-    C --> D[Defect fixed]
-    D --> E[Tester retests]
-    E --> F{Resolved?}
-    F -->|Yes| G[Close defect]
-    F -->|No| C
+```text
+Defect discovered
+└─→ Record and describe
+   └─→ Developer investigates
+      └─→ Defect fixed
+         └─→ Tester retests
+            └─→ Resolved?
+               ├─[Yes]→ Close defect
+               └─[No] ↺ back to Developer investigates
 ```
 
 ## 16.4 Agile testing life cycle in Scrum
 
-```mermaid
-flowchart TD
-    A[Release Planning] --> B[Sprint Planning]
-    B --> C[Sprint Execution]
-    C --> D[Daily Scrum and Continuous Integration]
-    D --> E[Sprint Review]
-    E --> F[Sprint Retrospective]
-    F --> G{More sprints?}
-    G -->|Yes| B
-    G -->|No| H[Release End Game]
-    H --> I[Release Readiness and Sign-off]
+```text
+Release Planning
+└─→ Sprint Planning
+   └─→ Sprint Execution
+      └─→ Daily Scrum and Continuous Integration
+         └─→ Sprint Review
+            └─→ Sprint Retrospective
+               └─→ More sprints?
+                  ├─[Yes] ↺ back to Sprint Planning
+                  └─[No]→ Release End Game
+                     └─→ Release Readiness and Sign-off
 ```
 
 | Scrum stage | Testing stage | Main activities |
@@ -3472,15 +3146,17 @@ flowchart TD
 
 The quadrants classify tests on two axes: **business-facing vs technology-facing**, and **supporting programming vs critiquing the product**.
 
-```mermaid
-quadrantChart
-    title Agile Testing Quadrants
-    x-axis Supports Programming --> Critiques Product
-    y-axis Technology-facing --> Business-facing
-    quadrant-1 Q3 Business-facing / Critique
-    quadrant-2 Q2 Business-facing / Support
-    quadrant-3 Q1 Technology-facing / Support
-    quadrant-4 Q4 Technology-facing / Critique
+```text
+Agile Testing Quadrants
+
+                     SUPPORTS PROGRAMMING              CRITIQUES PRODUCT
+BUSINESS-FACING      Q2  Support                       Q3  Critique
+                     Functional, regression, E2E,      Exploratory, usability, UAT,
+                     business logic, usability         accessibility, alpha/beta
+
+TECHNOLOGY-FACING    Q1  Support                       Q4  Critique
+                     Unit, component, API, smoke,      Performance, security, reliability,
+                     TDD, integration, code review     interoperability, compatibility
 ```
 
 | Quadrant | Orientation | Purpose | Typical tests |
@@ -3498,11 +3174,9 @@ quadrantChart
 
 The strategy is **time-phased across the whole project**, not just one Sprint.
 
-```mermaid
-flowchart LR
-    A[Iteration 0<br/>prepare] --> B[Construction<br/>continuous testing]
-    B --> C[End Game<br/>release validation]
-    C --> D[Production<br/>monitor and fix]
+```text
+Iteration 0 prepare → Construction continuous testing → End Game release validation
+  → Production monitor and fix
 ```
 
 ### Iteration 0 — preparation
@@ -3513,16 +3187,16 @@ Set up the test environment · assemble the test team · prepare resources · ve
 
 ### Construction — the core
 
-```mermaid
-flowchart TD
-    A[Construction Iteration] --> B[Confirmatory Testing]
-    A --> C[Investigative Testing]
-    B --> D[Acceptance and functional testing]
-    B --> E[Developer unit and integration testing]
-    C --> F[Integration, load, security, stress testing]
-    D --> G[Continuous feedback]
-    E --> G
-    F --> G
+```text
+Construction Iteration
+├─→ Confirmatory Testing
+│  ├─→ Acceptance and functional testing
+│  │  └─→ Continuous feedback
+│  └─→ Developer unit and integration testing
+│     └─→ Continuous feedback (see above)
+└─→ Investigative Testing
+   └─→ Integration, load, security, stress testing
+      └─→ Continuous feedback (see above)
 ```
 
 | Category | Purpose | Includes |
@@ -3629,29 +3303,27 @@ TDD:          Write test → Write code → Refactor
 
 **Objectives:** verify correctness · detect defects early · encourage simple design · fast feedback · improve maintainability · create a refactoring safety net · make expected behaviour explicit.
 
-```mermaid
-flowchart TD
-    A[Understand requirement] --> B[Write failing test]
-    B --> C[Run test]
-    C --> D[Write minimum code]
-    D --> E[Run test again]
-    E --> F{Pass?}
-    F -->|No| D
-    F -->|Yes| G[Refactor]
-    G --> H[Run all tests]
-    H --> I{All pass?}
-    I -->|No| G
-    I -->|Yes| J[Add next test]
-    J --> B
+```text
+Understand requirement
+└─→ Write failing test
+   └─→ Run test
+      └─→ Write minimum code
+         └─→ Run test again
+            └─→ Pass?
+               ├─[No] ↺ back to Write minimum code
+               └─[Yes]→ Refactor
+                  └─→ Run all tests
+                     └─→ All pass?
+                        ├─[No] ↺ back to Refactor
+                        └─[Yes]→ Add next test
+                           └─↺ back to Write failing test
 ```
 
 ## 17.3 Red → Green → Refactor
 
-```mermaid
-flowchart LR
-    A[Red<br/>write failing test] --> B[Green<br/>minimum code to pass]
-    B --> C[Refactor<br/>improve design, keep behaviour]
-    C --> A
+```text
+Red write failing test → Green minimum code to pass → Refactor improve design, keep behaviour
+    ↺ back to Red write failing test
 ```
 
 | Phase | Action | Key point |
@@ -3764,17 +3436,17 @@ Unavailable item → error *"Item not available"*; loyalty member → coffee dis
 
 **Principles:** define first, code later · collaboration · executable specifications · validation focus.
 
-```mermaid
-flowchart TD
-    A[Discuss business requirement] --> B[Define acceptance criteria]
-    B --> C[Create acceptance tests]
-    C --> D[Implement feature]
-    D --> E[Execute acceptance tests]
-    E --> F{Criteria met?}
-    F -->|No| D
-    F -->|Yes| G[Demonstrate feature]
-    G --> H[Collect feedback]
-    H --> I[Refine if required]
+```text
+Discuss business requirement
+└─→ Define acceptance criteria
+   └─→ Create acceptance tests
+      └─→ Implement feature
+         └─→ Execute acceptance tests
+            └─→ Criteria met?
+               ├─[No] ↺ back to Implement feature
+               └─[Yes]→ Demonstrate feature
+                  └─→ Collect feedback
+                     └─→ Refine if required
 ```
 
 ### The ATDD cycle: Discuss → Distil → Develop → Demo
@@ -3812,16 +3484,16 @@ Scenario: Adding a product to an empty cart
 | **Tools** | JUnit, NUnit, pytest, xUnit | Cucumber, Behave, SpecFlow, JBehave | Cucumber, FitNesse, SpecFlow |
 | **Level** | Unit | Acceptance/integration behaviour | Acceptance/functional |
 
-```mermaid
-flowchart TD
-    A[Business need] --> B[Acceptance criteria]
-    B --> C[BDD scenarios]
-    B --> D[ATDD acceptance tests]
-    C --> E[Implementation guidance]
-    D --> E
-    E --> F[TDD unit tests]
-    F --> G[Implementation]
-    G --> H[Run unit and acceptance tests]
+```text
+Business need
+└─→ Acceptance criteria
+   ├─→ BDD scenarios
+   │  └─→ Implementation guidance
+   │     └─→ TDD unit tests
+   │        └─→ Implementation
+   │           └─→ Run unit and acceptance tests
+   └─→ ATDD acceptance tests
+      └─→ Implementation guidance (see above)
 ```
 
 > The three are **complementary**, not a rigid universal sequence: TDD = *does the code work?*; BDD = *do we agree how it behaves?*; ATDD = *does it satisfy acceptance?*
@@ -3840,17 +3512,17 @@ flowchart TD
 
 > Exploratory ≠ random. Good exploratory testing is guided by **charters, risk, time boxes, and structured notes**.
 
-```mermaid
-flowchart TD
-    A[Define test charter] --> B[Set time box]
-    B --> C[Explore application]
-    C --> D[Observe and learn]
-    D --> E[Record findings]
-    E --> F{New risk or question?}
-    F -->|Yes| G[Adjust focus]
-    G --> C
-    F -->|No| H[Prepare session report]
-    H --> I[Share findings, plan follow-up]
+```text
+Define test charter
+└─→ Set time box
+   └─→ Explore application
+      └─→ Observe and learn
+         └─→ Record findings
+            └─→ New risk or question?
+               ├─[Yes]→ Adjust focus
+               │  └─↺ back to Explore application
+               └─[No]→ Prepare session report
+                  └─→ Share findings, plan follow-up
 ```
 
 ### Three types
@@ -3934,13 +3606,9 @@ A test at the boundary (`is_adult(18) is True`) **kills** this mutant.
 | May be informational | Directly aligned with an objective |
 | e.g. completed tasks | e.g. achieve a release target |
 
-```mermaid
-flowchart TD
-    A[Collect metrics] --> B[Analyze results]
-    B --> C[Identify issues]
-    C --> D[Implement improvements]
-    D --> E[Measure impact]
-    E --> A
+```text
+Collect metrics → Analyze results → Identify issues → Implement improvements → Measure impact
+    ↺ back to Collect metrics
 ```
 
 **Core metrics:** **velocity** (work completed) · **burndown** (work remaining) · **burn-up** (completed vs total scope).
@@ -3965,15 +3633,10 @@ Team velocity   = total completed points ÷ number of sprints
 
 **Team velocity example:** 20, 24, 28 → `(20 + 24 + 28) / 3 = 24 points/sprint`.
 
-```mermaid
-flowchart TD
-    A[New team] --> B[Estimate Sprint Backlog]
-    B --> C[Execute Sprint]
-    C --> D[Check Definition of Done]
-    D --> E[Calculate Sprint velocity]
-    E --> F[Collect data across Sprints]
-    F --> G[Calculate historical average]
-    G --> H[Support future planning]
+```text
+New team → Estimate Sprint Backlog → Execute Sprint → Check Definition of Done
+  → Calculate Sprint velocity → Collect data across Sprints → Calculate historical average
+  → Support future planning
 ```
 
 **Interpreting trends**
@@ -3999,16 +3662,16 @@ A **burndown chart** shows **work remaining over time**.
 | **Ideal line** | Planned reduction |
 | **Actual line** | Recorded remaining work |
 
-```mermaid
-flowchart TD
-    A[Start Sprint] --> B[Define Sprint work]
-    B --> C[Track remaining work]
-    C --> D[Compare actual and ideal]
-    D --> E{On track?}
-    E -->|Yes| F[Continue monitoring]
-    E -->|No| G[Investigate risks and blockers]
-    G --> C
-    F --> H[Complete Sprint]
+```text
+Start Sprint
+└─→ Define Sprint work
+   └─→ Track remaining work
+      └─→ Compare actual and ideal
+         └─→ On track?
+            ├─[Yes]→ Continue monitoring
+            │  └─→ Complete Sprint
+            └─[No]→ Investigate risks and blockers
+               └─↺ back to Track remaining work
 ```
 
 **Reading the line**
@@ -4035,13 +3698,8 @@ A **late-Sprint crash** = a large amount of work is completed **near the end** o
 | **Address blockers quickly** | Prevent stuck work |
 | **Integrate regularly** | Catch integration problems early |
 
-```mermaid
-flowchart LR
-    A[Requirements] --> B[Development]
-    B --> C[Early testing]
-    C --> D[Integration]
-    D --> E[Validation]
-    E --> F[Done]
+```text
+Requirements → Development → Early testing → Integration → Validation → Done
 ```
 
 ## 18.5 Burn-up charts
@@ -4056,17 +3714,17 @@ A **burn-up chart** shows **completed work compared with total scope** over time
 | **Total-scope line** | Total planned scope |
 | **Ideal-progress line** | Optional planned reference |
 
-```mermaid
-flowchart TD
-    A[Define initial scope] --> B[Track completed work]
-    B --> C[Monitor total scope]
-    C --> D{Scope changed?}
-    D -->|Yes| E[Update scope measurement]
-    D -->|No| F[Continue tracking]
-    E --> F
-    F --> G[Compare completed work with total scope]
-    G --> H[Support progress and forecasting]
-    H --> B
+```text
+Define initial scope
+└─→ Track completed work
+   └─→ Monitor total scope
+      └─→ Scope changed?
+         ├─[Yes]→ Update scope measurement
+         │  └─→ Continue tracking
+         │     └─→ Compare completed work with total scope
+         │        └─→ Support progress and forecasting
+         │           └─↺ back to Track completed work
+         └─[No]→ Continue tracking (see above)
 ```
 
 **Scope changes:** **increase** = new requirements, discovered work, stakeholder requests; **reduction** = removed, descoped, or deprioritised work.
@@ -4095,17 +3753,17 @@ flowchart TD
 
 ## 18.8 Using metrics together
 
-```mermaid
-flowchart TD
-    A[Agile project] --> B[Velocity]
-    A --> C[Burndown]
-    A --> D[Burn-up]
-    B --> E[Planning and forecasting]
-    C --> F[Sprint progress monitoring]
-    D --> G[Scope and release tracking]
-    E --> H[Data-informed decisions]
-    F --> H
-    G --> H
+```text
+Agile project
+├─→ Velocity
+│  └─→ Planning and forecasting
+│     └─→ Data-informed decisions
+├─→ Burndown
+│  └─→ Sprint progress monitoring
+│     └─→ Data-informed decisions (see above)
+└─→ Burn-up
+   └─→ Scope and release tracking
+      └─→ Data-informed decisions (see above)
 ```
 
 | Metric | Main question |
